@@ -9,7 +9,7 @@ import { Polyline } from '@react-google-maps/api';
 import GuideCardContainer from '../GuideCardContainer/GuideCardContainer';
 
 const config = require('../../config');
-const GOOGLE_MAPS_API_KEY = config.googleMapsApiKey;
+const GOOGLE_MAPS_API_KEY = config.googleMapsKey;
 const mapContainerStyle = {
     width: '100%',
     height: '98vh'

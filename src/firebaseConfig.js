@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,13 +10,13 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const config = require('./config');
 const firebaseConfig = {
-  apiKey: config.apiKey,
-  authDomain: config.authDomain,
-  projectId: config.projectId,
-  storageBucket: config.storageBucket,
-  messagingSenderId: config.messagingSenderId,
-  appId: config.appId,
-  measurementId: config.measurementId
+  apiKey: config.firebaseConfig.apiKey,
+  authDomain: config.firebaseConfig.authDomain,
+  projectId: config.firebaseConfig.projectId,
+  storageBucket: config.firebaseConfig.storageBucket,
+  messagingSenderId: config.firebaseConfig.messagingSenderId,
+  appId: config.firebaseConfig.appId,
+  measurementId: config.firebaseConfig.measurementId
 };
 
 
@@ -24,4 +25,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const db = getFirestore(app);
-export{db};
+const auth = getAuth(app);
+
+export{db, app, auth};
