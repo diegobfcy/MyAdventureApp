@@ -1,0 +1,78 @@
+.MapCard {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 150px;  /* Aquí estableces la altura deseada para la tarjeta */
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;  
+    background: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  .imageContainerMapCard {
+    width: 100%;
+    height: 70%;  /* Establece la altura al 70% de la tarjeta */
+    background-size: cover;  /* La imagen cubre completamente el div */
+    background-position: center;  /* Centra la imagen en el div */
+  }
+  .MapCard img {
+    width: 100%;
+    height: 70%;  /* Esto define que la imagen ocupe el 70% de la altura total de la tarjeta */
+    object-fit: cover;
+  }
+  
+  
+  .MapCardInfo {
+    font-size: 10px;
+    flex: 1;  /* Ocupa el espacio restante, que sería aproximadamente el 30% */
+    padding: 20px;  /* Aquí establecemos un padding para el contenido */
+    background: white;  /* En caso de que la imagen no llegue al borde, este fondo asegura que no haya espacios transparentes */
+    height: 25%;
+  }
+  
+  .MapCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .MapCardRating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .MapCardRatingIcon {
+    max-height: 20px;
+    margin-left: 0.5em;
+  }
+  
+  .MapCardTags {
+    display: flex;
+    font-size: 5px;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    padding: 10px 0; /* Espacio arriba y abajo */
+  }
+  .MapCardTags span {
+    background-color: #792A49;  /* Color de fondo de la etiqueta; ajusta según tus preferencias */
+    color: white;  /* Color del texto de la etiqueta; ajusta según tus preferencias */
+    border-radius: 15px;  /* Bordes redondeados */
+    padding: 5px 10px;  /* Espacio interior alrededor del texto; ajusta según tus preferencias */
+    font-size: 7px;  /* Tamaño de fuente; ajusta según tus preferencias */
+    margin-right: 5px;  /* Espacio a la derecha de cada etiqueta; ajusta según tus preferencias */
+  }
+  
+  
+  .MapCard:hover {
+    transform: translateY(-10px); /* Mueve la tarjeta ligeramente hacia arriba */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta la sombra para dar sensación de elevación */
+  }
+  
+  .MapCard img {
+    width: 100%;
+    height: auto;
+  }

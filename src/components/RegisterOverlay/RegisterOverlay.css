@@ -1,0 +1,120 @@
+.RegisterOverlay-Fondo {
+    position: fixed;  /* Posicionamiento fijo respecto a la ventana del navegador */
+    top: 0;
+    left: 0;
+    width: 100vw;     /* 100% del ancho de la ventana */
+    height: 100vh;    /* 100% del alto de la ventana */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semi-transparente */
+    z-index: 1000;    /* Un valor alto para asegurar que esté por encima de otros elementos */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.RegisterOverlay-RegisterContainer {
+    width: 30%;
+    height: fit-content;
+    border-radius: 2vh;
+    background-color: #FFFFFF;
+    gap: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    position: relative;
+}
+/* Estilos para los contenedores */
+.RegisterOverlay-NombreApellidoContainer,
+.RegisterOverlay-CorreoContainer,
+.RegisterOverlay-PasswordConfirmPasswordContainer {
+    width: 100%;
+    max-width: 60%; 
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+/* Estilos para los inputs */
+.RegisterOverlay-NombreInput input,
+.RegisterOverlay-ApellidoInput input,
+.RegisterOverlay-CorreoInput input,
+.RegisterOverlay-PasswordInput input,
+.RegisterOverlay-ConfirmPasswordInput input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #792A49;
+    font-family: 'Quicksand', sans-serif;
+    transition: box-shadow 0.3s ease;
+    
+}
+
+/* Estilos para el foco en los inputs */
+.RegisterOverlay-NombreInput input:focus,
+.RegisterOverlay-ApellidoInput input:focus,
+.RegisterOverlay-CorreoInput input:focus,
+.RegisterOverlay-PasswordInput input:focus,
+.RegisterOverlay-ConfirmPasswordInput input:focus {
+    box-shadow: 0 0 10px rgba(121, 42, 73, 0.3);
+    outline: none;
+}
+
+/* Estilos para el placeholder en los inputs */
+.RegisterOverlay-NombreInput input::placeholder,
+.RegisterOverlay-ApellidoInput input::placeholder,
+.RegisterOverlay-CorreoInput input::placeholder,
+.RegisterOverlay-PasswordInput input::placeholder,
+.RegisterOverlay-ConfirmPasswordInput input::placeholder {
+    color: #792A49;
+}
+.RegisterOverlay-NombreApellidoContainer-NombreApellidoSpan,
+.RegisterOverlay-CorreoContainer-CorreoSpan,
+.RegisterOverlay-PasswordConfirmPasswordContainer-PasswordSpan {
+    color: #792A49;
+    font-weight: bold;
+
+}
+.RegisterOverlay-RegisterButton {
+    width: 100%;
+    background-color: #792A49;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold; /* Añadido para tener el texto en negrita */
+    padding:  8px;
+    cursor: pointer; /* Cambia el cursor a mano al pasar el mouse sobre el botón */
+    transition: background-color 0.3s ease;
+}
+.RegisterOverlay-RegisterButton:hover {
+    background-color: #5a1f37;
+}
+.RegisterOverlay-RegisterContainer-Logo {
+    width: 20%;
+    height: auto;
+    margin-bottom: 5%;
+}
+.RegisterOverlay-RegisterContainer-CloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #D9D9D9;
+    color: #792A49;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.RegisterOverlay-RegisterContainer-CloseButton:hover {
+    background-color: #792A49;
+    color: #FFFFFF;
+}

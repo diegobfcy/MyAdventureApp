@@ -1,0 +1,177 @@
+.guide-profile {
+    position: relative;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    justify-content: center;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.profile-content {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+    margin-left: 60px;
+    margin-right: 60px;
+    z-index: 1;
+}
+
+.guide-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-viajes-container {
+    display: flex;
+    justify-content: space-between; /* Cambia center por space-between */
+    width: 40%;
+    margin-top: 20px;
+    margin-left: auto; /* Añade márgenes automáticos para */
+    margin-right: auto; /* centrar el contenedor en su contenedor padre */
+}
+.guide-profile-rating img {
+    margin-left: 5px;
+    width: 25px;  /* Ajusta el ancho como desees */
+    height: 25px;  /* Ajusta el alto como desees */
+}
+.guide-profile-rating{
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+    font-weight: bold;
+} 
+.guide-profile-viajes{
+    font-weight: bold;
+}
+
+
+
+.guide-profile-image {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    top: -60px;
+    margin-bottom: -50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+
+}
+.guide-profile-name{
+    font-weight: bold;     /* Hace la letra en negrita */
+    font-size: 1.3em;     /* Ajusta el tamaño de la letra. 1em es el tamaño actual, por lo que 1.5em lo hará un 50% más grande */
+    margin-top: 0;   
+}
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+    padding: 10px 0; /* Espacio arriba y abajo */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+}
+
+.tags-container span {
+    background-color: #792A49;  /* Color de fondo de la etiqueta; ajusta según tus preferencias */
+    color: white;  /* Color del texto de la etiqueta; ajusta según tus preferencias */
+    border-radius: 15px;  /* Bordes redondeados */
+    padding: 5px 10px;  /* Espacio interior alrededor del texto; ajusta según tus preferencias */
+    font-size: 10px;  /* Tamaño de fuente; ajusta según tus preferencias */
+    margin-right: 5px;  /* Espacio a la derecha de cada etiqueta; ajusta según tus preferencias */
+}
+
+.about-container {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    z-index: 1;
+    overflow-y:auto;   /* Añade barra de desplazamiento si el contenido se desborda del max-height */
+    max-height: none;
+}
+h3 {
+    text-align: center;  /* Centra el texto "Sobre Mi" */
+}
+
+.description-container {
+    max-height: 150px;  /* O la altura máxima que quieras para el contenedor */
+    width: 100%;       /* Ocupa todo el ancho disponible */
+    word-wrap: break-word;          /* Permite la ruptura de palabras */
+    word-break: break-all;          /* Rompe palabras largas */
+    hyphens: auto;     
+}
+
+.disponibility-container {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    z-index: 1;
+    overflow-y:auto;   /* Añade barra de desplazamiento si el contenido se desborda del max-height */
+    max-height: none;
+}
+h3 {
+    text-align: center;  /* Centra el texto "Sobre Mi" */
+}
+.dispo-container {
+    max-height: 150px;  /* O la altura máxima que quieras para el contenedor */
+    width: 100%;       /* Ocupa todo el ancho disponible */
+    word-wrap: break-word;          /* Permite la ruptura de palabras */
+    word-break: break-all;          /* Rompe palabras largas */
+    hyphens: auto;     
+}
+.reviews-container {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    z-index: 1;
+   /* Añade barra de desplazamiento si el contenido se desborda del max-height */
+    max-height: none;
+}
+h3 {
+    text-align: center;  /* Centra el texto "Sobre Mi" */
+}
+.rev-container {
+    max-height: none;  /* O la altura máxima que quieras para el contenedor */
+    width: 100%;       /* Ocupa todo el ancho disponible */
+    word-wrap: break-word;          /* Permite la ruptura de palabras */
+    word-break: break-all;          /* Rompe palabras largas */
+    hyphens: auto;     
+}
+
+.star-icon {
+    width: 25px;
+    height: 25px;
+}

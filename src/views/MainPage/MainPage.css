@@ -1,0 +1,153 @@
+.MainPageContainer {
+    display: flex;
+    height: 100vh; /* Ocupar todo el alto de la pantalla, si lo deseas */
+    width: 100%;
+}
+.left-div{
+    width: 50%;
+    height: 100%; /* Ocupar todo el alto del contenedor padre */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    
+} 
+.right-div {
+    display: flex;
+    width: 50%;
+    height: 100%; /* Ocupar todo el alto del contenedor padre */
+    align-items: center;
+    justify-content: center;
+    background-color: #792A49;
+    flex-direction: column;
+    gap: 2%;
+}
+.MainPage-Logo{
+    height: auto;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.email-input-container {
+    width: 100%;
+    max-width: 40%; /* Puedes ajustar este valor según tus necesidades */
+}
+
+.email-input-container input {
+    box-sizing: border-box;
+    padding: 8px 16px; /* Padding uniforme sin considerar íconos */
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #792A49;
+    font-family: 'Quicksand', sans-serif;
+    transition: box-shadow 0.3s ease;
+    width:100%;
+}
+
+.email-input-container input:focus {
+    box-shadow: 0 0 10px rgba(121, 42, 73, 0.3);
+    outline: none;
+}
+
+.email-input-container input::placeholder {
+    color: #792A49;
+}
+.password-input-container {
+    width: 100%;
+    max-width: 40%; /* Puedes ajustar este valor según tus necesidades */
+}
+
+.password-input-container input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px; /* Padding uniforme sin considerar íconos */
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #792A49;
+    font-family: 'Quicksand', sans-serif;
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.password-input-container input:focus {
+    box-shadow: 0 0 10px rgba(121, 42, 73, 0.3);
+    outline: none;
+}
+
+.password-input-container input::placeholder {
+    color: #792A49;
+}
+
+.fade-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    object-fit: cover; /* Ajusta y dimensiona la imagen dentro del contenedor */
+    transform: scale(1);  /* Estado inicial, sin zoom */
+    transition: opacity 1s, transform 3s;
+}
+
+.fade-image.active {
+    opacity: 1; /* Muestra la imagen activa */
+}
+.fade-image:not(.active) {
+    transform: scale(1.4);  /* Aplica un ligero zoom */
+    opacity: 0;
+}
+.MainPage-BtnLogin {
+    width: 40%;
+    background-color: #FFFFFF;
+    color: #792A49;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold; /* Añadido para tener el texto en negrita */
+    padding:  8px 16px;
+    cursor: pointer; /* Cambia el cursor a mano al pasar el mouse sobre el botón */
+    transition: background-color 0.3s ease;
+}
+.MainPage-BtnLogin:hover {
+    background-color: #EDEDED; /* Un color más oscuro cuando pasas el mouse sobre el botón */
+}
+.MainPage-GoogleAuth, .MainPage-FacebookAuth {
+    justify-content: center;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    color: #792A49;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px; /* Ajusta según tus preferencias */
+    /*margin: 5px 0; /* Añade un pequeño margen entre botones si están uno debajo del otro */
+    cursor: pointer; /* Cambia el cursor a mano al pasar el mouse sobre el botón */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Una pequeña transición para efectos de hover */
+}
+
+.MainPage-GoogleAuth:hover, .MainPage-FacebookAuth:hover {
+    background-color: #EDEDED; /* Un color más oscuro cuando pasas el mouse sobre el botón */
+}
+
+.auth-logo {
+    height: 20px; /* Ajusta según tus preferencias */
+    margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+.MainPage-WhiteLine {
+    height: 1px; /* Esto determina el grosor de la línea. Puedes ajustarlo según lo que necesites. */
+    background-color: white;
+    width: 40%; /* Para que ocupe todo el ancho del contenedor padre. */
+}
+.MainPage-RegistrarSpan {
+    color: #FFFFFF;
+}
+.MainPage-RegistrateSpan {
+    cursor: pointer;
+    color: aqua;  
+    text-decoration: underline;  
+}

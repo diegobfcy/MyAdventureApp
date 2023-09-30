@@ -1,0 +1,43 @@
+.mapContainerStyle{
+    height: 100%; /* calc(100vh - 60px) Ajusta 60px al alto de tu barra de herramientas */
+    width: 100%;
+    overflow: hidden;
+}
+.mapContainerStyle * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.MapContainer{
+    height: calc(100vh - 90px); /* Ajusta 60px al alto de tu barra de herramientas */
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+}
+.mapContainerStyle{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.btnAceptar {
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+    color: #792A49;
+    font-family: 'Quicksand', sans-serif;
+    padding: 12px 20px;  /* Aumenta el padding para hacer el botón más grande */
+    font-size: 18px;  /* Aumenta el tamaño del texto */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+
+}
+
+.btnAceptar:hover {
+    background-color: #B7B7B7;
+    color: #FFFFFF;
+}

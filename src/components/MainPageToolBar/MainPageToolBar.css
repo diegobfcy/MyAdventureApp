@@ -1,0 +1,37 @@
+.MainPageToolBar {
+    height: 10vh;
+    top: 0;
+    position: sticky;
+    display: flex;
+    z-index: 1000;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #792A49;
+}
+.MainPageToolBar-LeftDiv{
+    display: flex;
+    align-items: center;
+    margin: 1.5%;
+}
+.MainPageToolBar-Logo{
+    height: 7vh;
+    width: auto;
+
+}
+.MainPageToolBar-RightDiv{
+    display: flex;
+    
+    margin: 1.5%;
+    gap:5%;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+.MainPageToolBar-MidDiv {
+    margin: 2%;
+    width: 100%;
+    display: flex;
+    gap: 5%;
+    font-weight: bold;
+    color: #FFFFFF;
+}

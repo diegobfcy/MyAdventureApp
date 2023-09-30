@@ -1,0 +1,116 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 95%; /* Ajusta según tus necesidades */
+  margin: 0 auto; /* Centrar el contenedor principal */
+}
+
+.headerText {
+  color: #451729;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.headerLine {
+  width: 100%; /* Ajusta al valor que desees */
+  height: 2px;
+  background-color: #792A49;
+  margin-bottom: 20px;
+}
+.cardLarge {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Opcional: para darle un ligero sombreado */
+  width: 95%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.cardImageContainer {
+  position: relative;
+  width: 70%;  /* O cualquier ancho que desees */
+  height: 500px; /* Define una altura específica para tu contenedor de imagen */
+  background-size: cover;  /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; 
+}
+
+.cardImageContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; /* Aseguramos que la imagen se estire a lo ancho del contenedor */
+  bottom: 0; /* Aseguramos que la imagen ocupe toda la altura del contenedor */
+  width: 100%; /* Establecemos un ancho del 100% */
+  height: 100%; /* Establecemos una altura del 100% */
+  object-fit: cover; /* Asegura que la imagen cubra todo el contenedor manteniendo el aspecto */
+  transition: opacity 1s ease-in-out;
+}
+
+
+.cardInfo {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  position: relative;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardRating {
+  display: flex;
+  align-items: center;
+}
+
+.ratingIcon {
+  max-height: 20px;
+  margin-left: 0.5em;
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.divider {
+  width: 100%;  /* Ocupa todo el ancho del contenedor */
+  border: 0;  /* Elimina el borde predeterminado */
+  border-top: 2px solid #792A49;  /* Añade una línea en la parte superior con el color y grosor deseados */
+  margin: 20px 0;  /* Espacio antes y después de la línea */
+}
+.cardTags span {
+  background-color: #792A49;  /* Color de fondo de la etiqueta; ajusta según tus preferencias */
+  color: white;  /* Color del texto de la etiqueta; ajusta según tus preferencias */
+  border-radius: 15px;  /* Bordes redondeados */
+  padding: 5px 10px;  /* Espacio interior alrededor del texto; ajusta según tus preferencias */
+  font-size: 14px;  /* Tamaño de fuente; ajusta según tus preferencias */
+  margin-right: 5px;  /* Espacio a la derecha de cada etiqueta; ajusta según tus preferencias */
+}
+.dividerLine {
+  height: 2px; /* Altura de la línea */
+  background-color: #792A49; /* Color de la línea */
+  width: 100%; /* Ocupará todo el ancho de .cardInfo */
+  margin-top: auto; /* Para empujar la línea al fondo, justo encima del botón */
+  margin-bottom: 20px; /* Espacio entre la línea y el botón */
+}
+.arrowButton {
+  background-color: transparent; /* Hace el botón transparente */
+  border: none; /* Elimina cualquier borde predeterminado del botón */
+  position: absolute; /* Posicionamiento absoluto */
+  bottom: 5px; /* Espacio desde el fondo */
+  left: 50%; /* Centrado horizontalmente */
+  transform: translateX(-50%); /* Alineación central precisa */
+}
+
+
+.arrowButton img {
+  width: 1.5em;
+  height: 1.5em;
+}

@@ -1,0 +1,113 @@
+.MapToolBar {
+
+    position: -webkit-sticky;  
+    position: sticky;  
+    top: 0;  
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    height: 55px;
+
+  }
+  
+  .MapLogo {
+    max-height: 50px;  /* O según el tamaño que desees */
+    margin-right: 20px;
+    margin-left: 15px;
+  }
+  
+  .MapSearchBar {
+    position: relative;  
+    flex-grow: 1;  
+    margin: 0 400px;
+  }
+  
+  .MapSearchBar input {
+    width: 100%; 
+    padding: 8px 8px 8px 40px;  /* Espacio a la izquierda para el ícono de lupa */
+    border: none;  /* Sin bordes */
+    border-radius: 5px;
+    background-color: #D9D9D9;  /* Color de fondo para el input */
+    color: #792A49;  /* Color de texto para el input */
+    font-family: 'Quicksand', sans-serif;  /* Asegúrate de cambiar 'TuFuenteDeseada' a la fuente que estés usando */
+    transition: box-shadow 0.3s ease;  /* Transición suave para el foco */
+  }
+  
+  .MapSearchBar input:focus {
+    box-shadow: 0 0 10px rgba(121, 42, 73, 0.3);  /* Sombra sutil al enfocar el input */
+    outline: none;  /* Elimina el borde predeterminado del navegador al enfocar */
+  }
+  .MapSearchBar input::placeholder {
+    color: #792A49;
+}
+  .MapSearchIcon {
+    position: absolute;  
+    top: 50%;
+    left: 10px;  
+    transform: translateY(-50%);
+    color: #792A49;  /* Color para el ícono de lupa */
+  }
+  
+  .MapToolBar-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btnCrearMapToolBar {
+    background-color: #D9D9D9;  /* Fondo con el color D9D9D9 */
+    border: none;  /* Sin bordes */
+    border-radius: 5px;  /* Borde redondeado para el botón */
+    color: #792A49;  /* Color del texto */
+    font-family: 'Quicksand', sans-serif;  /* Fuente Quicksand */
+    display: flex;  /* Para alinear el ícono y el texto */
+    align-items: center;  /* Centrar verticalmente */
+    padding: 12px 20px;  /* Aumenta el padding para hacer el botón más grande */
+    font-size: 16px;  /* Aumenta el tamaño del texto */
+    font-weight: bold; /* Espacio alrededor del texto y el ícono */
+    cursor: pointer;  /* Estilo de cursor de mano */
+    transition: background-color 0.3s ease;  /* Transición suave para el hover */
+    margin-right: 80px;
+  }
+  
+  .btnCrearMapToolBar:hover {
+    background-color: #B7B7B7;  /* Color de fondo ligeramente más oscuro al pasar el mouse */
+    color: #FFFFFF;  /* Color de texto al pasar el mouse */
+  }
+  
+  .btnIconMapToolBar {
+    width: 20px;  /* Tamaño del ícono. Ajusta según tu necesidad */
+    margin-right: 8px;  /* Espacio entre el ícono y el texto */
+  }
+  
+  .btnPerfilMapToolBar {
+    background-color: transparent;  /* Sin fondo */
+    border: none;  /* Sin bordes */
+    cursor: pointer;  /* Estilo de cursor de mano */
+    padding: 0; /* Sin padding */
+  }
+  
+  .profileIconMapToolBar {
+    width: 50px;  /* Tamaño de la imagen. Ajusta según tu necesidad */
+    height: 50px; /* Altura de la imagen. Ajusta para que sea proporcional */
+    border-radius: 50%;  /* Hace que la imagen sea redonda */
+  }
+  
+  /* Estilo para hover, si lo deseas */
+  .btnPerfilMapToolBar:hover .profileIconMapToolBar {
+    opacity: 0.8;  /* Hace que la imagen sea ligeramente transparente al pasar el mouse */
+  }
+  
+  
+  .react-icons {
+    margin-right: 5px;
+  }
+  
+  .MapToolBar .btnCrearMapToolBar:hover,
+  .MapToolBar .btnPerfilMapToolBar:hover {
+    opacity: 0.8;
+  }

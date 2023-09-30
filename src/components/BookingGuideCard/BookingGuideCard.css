@@ -1,0 +1,115 @@
+
+.booking-guide-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 15px;
+    max-height: 500px;
+}
+
+.booking-guide-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25); 
+}
+
+.booking-guide-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-guide-card-middle {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Para que tome el espacio restante entre los botones */
+    padding: 0 0px;
+}
+
+.booking-guide-card-middle-left, 
+.booking-guide-card-middle-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding: 0 10px;
+}
+.booking-guide-card-middle-right{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    margin-left: auto;
+}
+.booking-guide-image {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10%;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.booking-guide-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.booking-guide-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+    padding: 10px 0; 
+}
+
+.booking-guide-tags span {
+    background-color: #792A49;
+    color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.booking-guide-rating img {
+    margin-left: 5px;
+    width: 25px; 
+    height: 25px;
+}
+
+.booking-guide-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+    font-weight: bold;
+}
+
+.booking-guide-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.booking-transport-status {
+    display: inline-block !important;
+    border-radius: 5px;
+    padding: 2px 8px;
+    background: white;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.with-transport {
+    border: 1px solid green;
+    color: green;
+}
+
+.without-transport {
+    border: 1px solid red;
+    color: red;
+}
