@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Afiliate.css';
 import AfiliateEmpresaOverlay from '../../components/AfiliateEmpresaOverlay/AfiliateEmpresaOverlay';
+import AfiliateGuiaOverlay from '../../components/AfiliateGuiaOverlay/AfiliateGuiaOverlay';
+import AfiliateTransporteOverlay from '../../components/AfiliateTransporteOverlay/AfiliateTransporteOverlay';
 
 const Afiliate = () => {
     const [activeOverlay, setActiveOverlay] = useState(null); // 'empresa', 'guia', 'transporte' o null
@@ -15,6 +17,8 @@ const Afiliate = () => {
 
     return (
         <div className="AfiliateContainer">
+
+
             <h1 className="AfiliateTitle">Trabaja con nosotros</h1>
 
             <div className="CardsContainer">
@@ -35,8 +39,10 @@ const Afiliate = () => {
                 </div>
             </div>
             {activeOverlay === 'empresa' && <AfiliateEmpresaOverlay onClose={closeOverlay} />}
-            {/* Aquí puedes añadir condiciones similares para los otros overlays. Por ejemplo:
             {activeOverlay === 'guia' && <AfiliateGuiaOverlay onClose={closeOverlay} />}
+            {activeOverlay === 'transporte' && <AfiliateTransporteOverlay onClose={closeOverlay} />}
+            {/* Aquí puedes añadir condiciones similares para los otros overlays. Por ejemplo:
+            
             {activeOverlay === 'transporte' && <AfiliateTransporteOverlay onClose={closeOverlay} />} */}
         </div>
     );
