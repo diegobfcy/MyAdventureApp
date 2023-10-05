@@ -1,0 +1,64 @@
+.AfiliateContainer {
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding: 20px;
+
+    margin: 20px auto;  
+    border: 1px solid #792A49;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.AfiliateTitle {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #792A49;
+}
+
+.CardsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.AfiliateCard {
+    width: calc(30% - 20px); /* Ajustamos el ancho para contar el margen */
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #792A49;
+    border-radius: 8px;
+    margin: 0 10px; /* Añadimos margen a los lados de la tarjeta */
+    color: white;
+}
+
+.AfiliateCard button {
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    color: #792A49;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    
+}
+
+.AfiliateCard button:hover {
+    background-color: #e2e2e2;
+}
+.AfiliateCard-Title{
+    font-weight: bold;
+}
+
+/* Responsividad para tabletas y dispositivos con ancho menor a 768px */
+@media (max-width: 768px) {
+    .CardsContainer {
+        flex-direction: column;
+    }
+
+    .AfiliateCard {
+        width: 80%;
+        margin: 0 0 20px 0; /* Solo mantenemos el margen inferior */
+    }
+}

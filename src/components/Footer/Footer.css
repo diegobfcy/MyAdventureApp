@@ -1,0 +1,29 @@
+.FooterContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #792A49;
+    color: #fff;
+}
+
+.FooterContainer-RightContainer,
+.FooterContainer-MidContainer,
+.FooterContainer-LeftContainer {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+}
+
+/* Estilos responsive para pantallas menores a 600px */
+@media only screen and (max-width: 600px) {
+    .FooterContainer {
+        flex-direction: column;
+    }
+
+    .FooterContainer-RightContainer,
+    .FooterContainer-MidContainer,
+    .FooterContainer-LeftContainer {
+        margin-bottom: 10px;
+    }
+    
+}

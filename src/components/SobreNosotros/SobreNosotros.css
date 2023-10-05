@@ -1,0 +1,22 @@
+.SobreNosotrosContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #792A49; /* Añadido un borde */
+    border-radius: 10px;    /* Actualizado el border-radius a 10px */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;     /* Centramos el texto */
+    max-width: 80%;         /* Establece un ancho máximo para que no ocupe toda la pantalla */
+    margin: 20px auto;  
+}
+
+.SobreNosotrosHeader {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #792A49;
+}
+
+.SobreNosotrosContenido {
+    font-size: 16px;
+    line-height: 1.5;
+}

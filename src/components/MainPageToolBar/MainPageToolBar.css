@@ -35,3 +35,12 @@
     font-weight: bold;
     color: #FFFFFF;
 }
+.MainPageToolBar-scrolled {
+    background-color: #FFFFFF; /* Cambia el color de fondo cuando hagas scroll */
+}
+
+.MainPageToolBar-scrolled .MainPageToolBar-LeftDiv .MainPageToolBar-Logo,
+.MainPageToolBar-scrolled .MainPageToolBar-RightDiv span,
+.MainPageToolBar-scrolled .MainPageToolBar-MidDiv span {
+    color: #792A49; /* Cambia el color del texto cuando hagas scroll */
+}

@@ -7,10 +7,13 @@ import { useState, useEffect } from 'react';
 import FacebookLogo from '../../assets/icons/FacebookLogo.png';
 import GoogleLogo from '../../assets/icons/GoogleLogo.png';
 import RegisterOverlay from '../../components/RegisterOverlay/RegisterOverlay';
-
+import Footer from '../../components/Footer/Footer';
+import SobreNosotros from '../../components/SobreNosotros/SobreNosotros';
+import Afiliate from '../../components/Afiliate/Afiliate';
 
 
 function MainPage(){
+    
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +23,7 @@ function MainPage(){
             password
         };
 
-        console.log(loginData); 
+        
         
     };
     const [activeIndex, setActiveIndex] = useState(0);
@@ -29,6 +32,13 @@ function MainPage(){
     const handleOpenRegistration = () => {
         setShowRegistration(true);
     };
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveIndex((prevIndex) => (prevIndex + 1) % 3);  
+        }, 5000);
+
+        return () => clearInterval(interval);  
+    }, []);
     return (
         <div className='MainPageParentContainer'>
             <MainPageToolBar/>
@@ -65,6 +75,16 @@ function MainPage(){
                 
             </div>
             {showRegistration && <RegisterOverlay onClose={() => setShowRegistration(false)} />}
+            <div className='MainPageSobreNosotrosContainer'>
+                <SobreNosotros/>
+            </div>
+            <div className='MainPageAfiliateContainer'>
+                <Afiliate/>
+            </div>
+
+            <div className='MainPageFooterContainer'>
+                <Footer/>
+            </div>
         </div>
 
     );

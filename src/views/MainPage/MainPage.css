@@ -90,7 +90,7 @@
     opacity: 0;
     object-fit: cover; /* Ajusta y dimensiona la imagen dentro del contenedor */
     transform: scale(1);  /* Estado inicial, sin zoom */
-    transition: opacity 1s, transform 3s;
+    transition: opacity 1s;
 }
 
 .fade-image.active {
@@ -150,4 +150,40 @@
     cursor: pointer;
     color: aqua;  
     text-decoration: underline;  
+}
+.MainPageAfiliateContainer {
+    height: fit-content;
+}
+@media (max-width: 450px) {
+    .left-div {
+        display: none; /* Oculta el div en dispositivos móviles */
+    }
+}
+@media (min-width: 450px) and (max-width: 768px) {
+    .MainPageContainer {
+        flex-direction: column;
+    }
+    .left-div {
+        display: none; /* Oculta el div en tablets */
+    }
+    .right-div {
+        width: 100%;
+    }
+    .MainPage-Logo {
+        width: 40%; /* Ajusta según necesidad */
+    }  
+    .email-input-container, .password-input-container {
+        max-width: 60%; 
+    }
+    .MainPage-BtnLogin, .MainPage-GoogleAuth, .MainPage-FacebookAuth {
+        width: 60%;
+    }
+    .MainPage-WhiteLine {
+        width: 60%;
+    }
+}
+
+/* Estilos para dispositivos de escritorio */
+@media (min-width: 769px) {
+    /* Si necesitas hacer ajustes específicos para pantallas aún más grandes, aquí es donde los colocarías. Por ahora, tus estilos base ya manejan esta categoría. */
 }

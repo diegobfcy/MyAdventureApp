@@ -118,3 +118,31 @@
     background-color: #792A49;
     color: #FFFFFF;
 }
+/* Estilos previamente definidos... */
+
+/* Media query para tablets y dispositivos con anchura menor a 768px */
+@media (max-width: 768px) {
+
+    .RegisterOverlay-RegisterContainer {
+        width: 70%;  /* Aumentamos el ancho del contenedor */
+    }
+
+    .RegisterOverlay-RegisterContainer-Logo {
+        width: 40%; /* Ajustamos el tamaño del logo */
+    }
+    
+    /* Estilos para los contenedores */
+    .RegisterOverlay-NombreApellidoContainer,
+    .RegisterOverlay-CorreoContainer,
+    .RegisterOverlay-PasswordConfirmPasswordContainer {
+        max-width: 100%; /* Permitimos que los contenedores ocupen el ancho completo */
+    }
+}
+
+/* Media query para móviles y dispositivos con anchura menor a 480px */
+@media (max-width: 480px) {
+
+    .RegisterOverlay-RegisterContainer {
+        width: 90%;  /* Aumentamos el ancho del contenedor para móviles */
+    }
+}

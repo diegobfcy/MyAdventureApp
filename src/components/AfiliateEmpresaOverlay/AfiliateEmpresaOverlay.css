@@ -1,0 +1,127 @@
+.AfiliateEmpresaOverlay-Fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.AfiliateEmpresaOverlay-Container {
+    width: 30%;
+    height: fit-content;
+    border-radius: 2vh;
+    background-color: #FFFFFF;
+    gap: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    position: relative;
+}
+
+.AfiliateEmpresaOverlay-InputContainer {
+    width: 100%;
+    max-width: 60%; 
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.AfiliateEmpresaOverlay-Input input,
+.AfiliateEmpresaOverlay-Input textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    color: #792A49;
+    font-family: 'Quicksand', sans-serif;
+    transition: box-shadow 0.3s ease;
+}
+
+.AfiliateEmpresaOverlay-Input input:focus,
+.AfiliateEmpresaOverlay-Input textarea:focus {
+    box-shadow: 0 0 10px rgba(121, 42, 73, 0.3);
+    outline: none;
+}
+
+.AfiliateEmpresaOverlay-Input input::placeholder,
+.AfiliateEmpresaOverlay-Input textarea::placeholder {
+    color: #792A49;
+}
+
+.AfiliateEmpresaOverlay-Span {
+    color: #792A49;
+    font-weight: bold;
+}
+
+.AfiliateEmpresaOverlay-Button {
+    width: 100%;
+    background-color: #792A49;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding:  8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.AfiliateEmpresaOverlay-Button:hover {
+    background-color: #5a1f37;
+}
+
+.AfiliateEmpresaOverlay-Logo {
+    width: 20%;
+    height: auto;
+    margin-bottom: 5%;
+}
+
+.AfiliateEmpresaOverlay-CloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #D9D9D9;
+    color: #792A49;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.AfiliateEmpresaOverlay-CloseButton:hover {
+    background-color: #792A49;
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .AfiliateEmpresaOverlay-Container {
+        width: 70%;
+    }
+
+    .AfiliateEmpresaOverlay-Logo {
+        width: 40%;
+    }
+
+    .AfiliateEmpresaOverlay-InputContainer {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .AfiliateEmpresaOverlay-Container {
+        width: 90%;
+    }
+}
