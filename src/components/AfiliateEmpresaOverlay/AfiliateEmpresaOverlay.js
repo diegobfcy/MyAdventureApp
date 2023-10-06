@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './AfiliateEmpresaOverlay.css';
 import Logo from '../../assets/icons/LogoColor.png';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
 function AfiliateEmpresaOverlay({ onClose }) {
@@ -15,16 +15,24 @@ function AfiliateEmpresaOverlay({ onClose }) {
     };
 
     const [placeData, setValues] = useState(initial);
-    
+    const [Place, setDataGuides] = useState([]);
+
     const changeData = e => {
         const { name, value } = e.target;
         setValues({ ...placeData, [name]: value });
     }
 
     const handleAffiliation = () => {
-        console.log(placeData);  
-        savePlaceToDatabase();
-        onClose();
+        const isPlaceExist = Place.some(elemento => 
+            elemento.latitude === placeData.latitude && elemento.longitude === placeData.longitude
+        );
+    
+        if (isPlaceExist) {
+            alert("El lugar ya esta registrado");
+        } else {
+            savePlaceToDatabase();
+            onClose();
+        } 
     };
 
     const savePlaceToDatabase = async () => {
@@ -35,6 +43,19 @@ function AfiliateEmpresaOverlay({ onClose }) {
             alert("No se pudo guardar el lugar");
         }
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const placeCollection = collection(db, 'Place');
+                const querySnapshot = await getDocs(placeCollection);
+                setDataGuides(querySnapshot.docs.map(doc => doc.data()));
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className='AfiliateEmpresaOverlay-Fondo'>

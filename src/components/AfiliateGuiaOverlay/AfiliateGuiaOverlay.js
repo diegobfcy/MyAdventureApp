@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AfiliateGuiaOverlay.css';
 import Logo from '../../assets/icons/LogoColor.png';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc,  getDocs, query, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 
 function AfiliateGuiaOverlay({ onClose }) {
@@ -15,17 +15,39 @@ function AfiliateGuiaOverlay({ onClose }) {
     };
 
     const [guideData, setValues] = useState(initial);
-    
+    const [Users, setDataUsers] = useState([]);
+
+
     const changeData = e => {
         const { name, value } = e.target;
         setValues({ ...guideData, [name]: value });
     }
 
     const handleAffiliation = () => {
-        console.log(guideData);  
-        saveGuideToDatabase();
-        onClose();
+        const isUserExist = Users.find(elemento => elemento.email === guideData.email);
+    
+        if (isUserExist && isUserExist.rol) {
+            alert(`El correo ya está registrado como ${isUserExist.rol}`);
+        } else if (isUserExist) {
+            updToGuide(isUserExist);
+            saveGuideToDatabase();
+            onClose();
+        } else {
+            alert("El correo no está registrado como usuario");
+        }
     };
+
+    const updToGuide = async (user) => {
+        try {
+            const userRef = doc(db, 'Usuario', user.id)
+            const act = {
+                rol: 'Guia',
+            };
+            updateDoc(userRef,act);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const saveGuideToDatabase = async () => {
         try {
@@ -35,6 +57,24 @@ function AfiliateGuiaOverlay({ onClose }) {
             alert("No se pudo guardar el guia");
         }
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {   
+                const usersCollection = collection(db, 'Usuario');
+                const usersSnapshot = await getDocs(query(usersCollection));
+                setDataUsers(usersSnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })));
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
+    
 
     return (
         <div className='AfiliateGuiaOverlay-Fondo'>
