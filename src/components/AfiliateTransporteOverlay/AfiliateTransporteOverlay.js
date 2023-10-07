@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AfiliateTransporteOverlay.css';
-import Logo from '../../assets/icons/LogoColor.png';  // Asegúrate de tener el path correcto a tu logo
+import Logo from '../../assets/icons/LogoColor.png'; 
+import { collection, addDoc,  getDocs, query, updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+
+// Asegúrate de tener el path correcto a tu logo
 
 function AfiliateTransporteOverlay({ onClose }) {
     
@@ -15,19 +19,64 @@ function AfiliateTransporteOverlay({ onClose }) {
     };
 
     const [transportData, setValues] = useState(initial)
+    const [Users, setDataUsers] = useState([]);
     
     const changeData = e => {
         const {name, value} = e.target;
         setValues({...transportData, [name]: value})
     }
 
-    // Aquí podrías implementar el código para manejar el envío de datos a tu backend o base de datos
-    const handleAfiliate = () => {
-        console.log(transportData);  
-        // Implementa tu función de autenticación o guardado aquí.
-
-        onClose();
+    const handleAffiliation = () => {
+        const isUserExist = Users.find(elemento => elemento.email === transportData.email);
+    
+        if (isUserExist && isUserExist.rol) {
+            alert(`El correo ya está registrado como ${isUserExist.rol}`);
+        } else if (isUserExist) {
+            updToTransport(isUserExist);
+            saveTransportToDatabase();
+            onClose();
+        } else {
+            alert("El correo no está registrado como usuario");
+        }
     };
+
+    const updToTransport = async (user) => {
+        try {
+            const userRef = doc(db, 'Usuario', user.id)
+            const act = {
+                rol: 'Transporte',
+            };
+            updateDoc(userRef,act);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const saveTransportToDatabase = async () => {
+        try {
+            const transportCollection = collection(db, 'Transport');
+            addDoc(transportCollection, transportData);
+        } catch (error) {
+            alert("No se pudo guardar el transporte");
+        }
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {   
+                const usersCollection = collection(db, 'Usuario');
+                const usersSnapshot = await getDocs(query(usersCollection));
+                setDataUsers(usersSnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })));
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
+    
 
     return (
         <div className='AfiliateTransporteOverlay-Fondo'>
@@ -72,7 +121,7 @@ function AfiliateTransporteOverlay({ onClose }) {
                     </div>
 
                     <div className='AfiliateTransporteOverlay-ButtonContainer'>
-                        <button className='AfiliateTransporteOverlay-Button' onClick={handleAfiliate}>
+                        <button className='AfiliateTransporteOverlay-Button' onClick={handleAffiliation}>
                             Afiliarse
                         </button>
                     </div>
