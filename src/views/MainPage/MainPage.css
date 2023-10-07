@@ -159,7 +159,7 @@
         display: none; /* Oculta el div en dispositivos móviles */
     }
 }
-@media (min-width: 450px) and (max-width: 768px) {
+@media (max-width: 768px) {
     .MainPageContainer {
         flex-direction: column;
     }

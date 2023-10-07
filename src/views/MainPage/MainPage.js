@@ -35,13 +35,13 @@ function MainPage(){
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIndex((prevIndex) => (prevIndex + 1) % 3);  
-        }, 5000);
+        }, 200000);
 
         return () => clearInterval(interval);  
     }, []);
     return (
         <div className='MainPageParentContainer'>
-            <MainPageToolBar/>
+            <MainPageToolBar onOpenRegistration={handleOpenRegistration} />
             <div className='MainPageContainer'>
                 
                 <div className='left-div'>
@@ -50,7 +50,7 @@ function MainPage(){
                     <img src="https://www.machupicchuperutours.com/wp-content/uploads/monasterio-de-santa-catalina.jpg" alt="Descripción 3" className={`fade-image ${activeIndex === 2 ? 'active' : ''}`} />
                 </div>
                 {/* contenedor de la derecha */}
-                <div className='right-div'>
+                <div className='right-div' id="login">
                     <img src={Logo} alt="Logo" className='MainPage-Logo' />
                     <Login/>
                     <button className='MainPage-GoogleAuth'>
@@ -75,14 +75,14 @@ function MainPage(){
                 
             </div>
             {showRegistration && <RegisterOverlay onClose={() => setShowRegistration(false)} />}
-            <div className='MainPageSobreNosotrosContainer'>
+            <div className='MainPageSobreNosotrosContainer'id="sobre-nosotros">
                 <SobreNosotros/>
             </div>
-            <div className='MainPageAfiliateContainer'>
+            <div className='MainPageAfiliateContainer' id="afiliate">
                 <Afiliate/>
             </div>
 
-            <div className='MainPageFooterContainer'>
+            <div className='MainPageFooterContainer' >
                 <Footer/>
             </div>
         </div>

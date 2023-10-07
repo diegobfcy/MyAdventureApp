@@ -1,0 +1,28 @@
+.DropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(51, 51, 51, 0.9);
+    width: 100%;
+    height: 200vw;
+    z-index: 1000;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.DropdownMenu a, .DropdownMenu .Dropdown-registerLink {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.DropdownMenu a:hover, .DropdownMenu .Dropdown-registerLink:hover {
+    background-color: #555;
+    text-decoration: underline;
+}
+
+.Dropdown-registerLink {
+    cursor: pointer;
+}

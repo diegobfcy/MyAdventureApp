@@ -44,3 +44,69 @@
 .MainPageToolBar-scrolled .MainPageToolBar-MidDiv span {
     color: #792A49; /* Cambia el color del texto cuando hagas scroll */
 }
+.MainPageToolBar a {
+    text-decoration: none;  /* Elimina el subrayado */
+    color: inherit;  /* Hereda el color del padre, de manera que no se muestre azul */
+}
+.MainPageToolBar a:hover {
+    text-decoration: underline;  /* Añade el subrayado al pasar el mouse */
+    color: white;  /* Cambia el color a blanco */
+}
+.MainPageToolBar a span {
+    color: inherit;  /* Hereda el color del padre, en este caso del enlace */
+}
+.MainPageToolBar .registerLink {
+    cursor: pointer;  /* Cambia el cursor a una mano al pasar sobre el span */
+    text-decoration: none;  /* Elimina cualquier subrayado */
+    color: inherit;  /* Hereda el color del padre */
+    transition: text-decoration 0.2s;  /* Añade una transición suave al subrayado */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos al pasar el mouse */
+.MainPageToolBar .registerLink:hover {
+    text-decoration: underline;  /* Añade el subrayado al pasar el mouse */
+    color: white;  /* Cambia el color a blanco */
+}
+.MainPageToolBar-Hamburger {
+    display: none;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    font-weight:bold;
+}
+
+.MainPageToolBar-Menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    width: 100%; /* O ajusta según tu diseño */
+    z-index: 1000;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.MainPageToolBar-Menu.open {
+    display: block;
+}
+
+.MainPageToolBar-NormalMenu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .MainPageToolBar-Hamburger {
+        display: block;
+    }
+
+    .MainPageToolBar-NormalMenu {
+        display: none; /* Oculta el menú normal en dispositivos móviles */
+    }
+}
+.MainPageToolBar-scrolled .MainPageToolBar-Hamburger {
+    color: #792A49; /* Cambia el color del ícono cuando hagas scroll */
+}
