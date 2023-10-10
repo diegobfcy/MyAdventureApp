@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Toolbar from '../../components/Toolbar/Toolbar';
 import LugarCardLarge from '../../components/LugarCardLarge/LugarCardLarge';// Ajusta la ruta si es necesario
 import './MainUserPage.css'
 import firebase from 'firebase/app';
 import 'firebase/database';
-import {db} from '../../firebaseConfig';
+import { db } from '../../firebaseConfig';
 import AddData from '../../components/AddData/AddData';
 import { collection, getDoc } from 'firebase/firestore';
 import { getDocs } from 'firebase/firestore';
 import LugarCardSmallContainer from '../../components/LugarCardSmall/LugarCardSmallContainer';
 import { CSSTransition } from 'react-transition-group';
 
-function MainUserPage({correoUsuario}) {
+import { FiltersProvider } from '../../context/filters';
+
+function MainUserPage({ correoUsuario }) {
   const [inProp, setInProp] = useState(false);
 
   useEffect(() => {
@@ -22,11 +24,13 @@ function MainUserPage({correoUsuario}) {
     <CSSTransition in={inProp} timeout={1000} classNames="slide">
 
       <div>
-          <Toolbar correoUsuario={correoUsuario}/>
+        <Toolbar correoUsuario={correoUsuario} />
 
-          <LugarCardLarge/>
-          
-          <LugarCardSmallContainer/>
+        <LugarCardLarge />
+
+        <FiltersProvider>
+          <LugarCardSmallContainer />
+        </FiltersProvider>
       </div>
     </CSSTransition>
 
