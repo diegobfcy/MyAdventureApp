@@ -1,13 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs, query, limit } from 'firebase/firestore';
-import { db } from '../../firebaseConfig'; 
+import { db } from '../../firebaseConfig';
 import LugarCardSmall from './LugarCardSmall';
-import './styles.css';  
+import './styles.css';
 import nextIcon from '../../assets/icons/arrowIconRight.png';
 import prevIcon from '../../assets/icons/arrowIconLeft.png';
 import VisibilitySensor from 'react-visibility-sensor'; // Añade esto
-import { FaSearch } from 'react-icons/fa';
+import FilterList from '../FilterList/FilterList'
+import { FilterContext } from '../../context/filters';
 
+function SearchingTerm(data) {
+  const { filterCategories } = useContext(FilterContext);
+  const { term } = useContext(FilterContext);
+
+  const termFilter = data.filter((x) => {
+    return x.nombre.toLowerCase().includes(term.toLowerCase()) || !term;
+  })
+
+  const dataFilter = termFilter.filter(x => {
+    return x.precio >= filterCategories.minPrice &&
+      (
+        !filterCategories.category || // Si no se selecciona una categoría, no se filtra por categoría
+        filterCategories.category.every((selectedCategory) => x.etiquetas.includes(selectedCategory))
+      );
+  });
+
+  return { dataFilter }
+}
 
 function LugarCardSmallContainer() {
   function changePage(direction) {
@@ -20,22 +39,17 @@ function LugarCardSmallContainer() {
       }
     }
   }
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [lastDoc, setLastDoc] = useState(null);
+  const { dataFilter } = SearchingTerm(data);
 
-  const [term, setTerm] = useState("");
-
-  const searchingTerm = (term) => (x) => {
-    return x.nombre.toLowerCase().includes(term.toLowerCase()) || !term;
-  };
-  
   useEffect(() => {
     const fetchData = async () => {
       const q = query(collection(db, 'Lugares'), limit(15 * (currentPage + 1)));
       const querySnapshot = await getDocs(q);
       setData(querySnapshot.docs.map(doc => doc.data()));
-      console.log(querySnapshot.docs.map(doc => doc.data()));
     };
     fetchData();
   }, [currentPage]);
@@ -44,32 +58,29 @@ function LugarCardSmallContainer() {
     <div className='mainContainer1'>
       <h1 className="headerText1">EXPERIENCIAS QUE NO TE PUEDES PERDER!</h1>
       <div className="headerLine1"></div>
-        <div className="search-bar">
-          <FaSearch className="search-icon" />
-          <input type="text" placeholder="Busca tu propia aventura" onChange={ e=> setTerm(e.target.value)} />
+      <FilterList />
+      <div className="CardSmallContainer">
+        {dataFilter.slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
+          <VisibilitySensor key={index} partialVisibility>
+            {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} />}
+          </VisibilitySensor>
+        ))}
+        {dataFilter.length === 0 && (
+          <p style={{ height: '800px' }}>No se encontraron resultados.</p>
+        )}
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+          >
+            <img src={prevIcon} alt="Anterior" />
+          </button>
+          <button onClick={() => setCurrentPage(prev => prev + 1)}>
+            <img src={nextIcon} alt="Siguiente" />
+          </button>
         </div>
-        <div className="CardSmallContainer">
-          {data.filter(searchingTerm(term)).slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
-            <VisibilitySensor key={index} partialVisibility>
-              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} />}
-            </VisibilitySensor>
-          ))}
-          {data.filter(searchingTerm(term)).length === 0 && (
-            <p style={{ height: '800px' }}>No se encontraron resultados.</p>
-          )}
-          <div className="pagination">
-            <button 
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
-              disabled={currentPage === 0}
-            >
-              <img src={prevIcon} alt="Anterior" />
-            </button>
-            <button onClick={() => setCurrentPage(prev => prev + 1)}>
-              <img src={nextIcon} alt="Siguiente" />
-            </button>
-          </div>
-        </div>
-      </div>        
+      </div>
+    </div>
   );
 
 }
