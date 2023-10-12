@@ -8,7 +8,7 @@ import { db } from '../../firebaseConfig';
 import AddData from '../../components/AddData/AddData';
 import { collection, getDoc } from 'firebase/firestore';
 import { getDocs } from 'firebase/firestore';
-import LugarCardSmallContainer from '../../components/LugarCardSmall/LugarCardSmallContainer';
+import LugarCardSmallContainer from '../../components/LugarCardSmallContainer/LugarCardSmallContainer';
 import { CSSTransition } from 'react-transition-group';
 
 import { FiltersProvider } from '../../context/filters';

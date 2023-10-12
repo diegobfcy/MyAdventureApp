@@ -1,7 +1,10 @@
-import React from 'react';
-import './styles.css';  
+import React,{useState} from 'react';
+import './LugarCardSmall.css';  
 import starIcon from '../../assets/icons/starIcon.png';
-function LugarCardSmall({ data, isVisible }) {
+import CardMasInformacion from '../CardMasInformacion/CardMasInformacion'
+import ReactDOM from 'react-dom';
+function LugarCardSmall({ data,isVisible , onSelectPlace }) {
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
   return (
     <div className={`lugarCardSmall ${isVisible ? 'animate-card' : ''}`}>
     <div className="imageContainer" style={{ backgroundImage: `url(${data.imagen[0]})` }}></div>
@@ -20,6 +23,15 @@ function LugarCardSmall({ data, isVisible }) {
       </div>
 
       <p>{data.descripcion}</p>
+      <div className="cardButtons">
+      {showMoreInfo && ReactDOM.createPortal(
+        <CardMasInformacion onClose={() => setShowMoreInfo(false)} />,
+        document.body
+      )}
+        <button className="customButton" onClick={() => setShowMoreInfo(true)}>Mas Informacion</button>
+        
+        <button className="customButton" onClick={() => onSelectPlace(data)}>Agregar a mi ruta</button>
+      </div>
     </div>
   </div>
   );

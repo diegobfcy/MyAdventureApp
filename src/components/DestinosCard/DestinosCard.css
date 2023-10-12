@@ -1,0 +1,44 @@
+/* DestinosCard.css */
+
+.DestinosCard {
+    display: flex;
+    justify-content: space-between; /* Separación entre los elementos */
+    align-items: center; /* Centrado vertical */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: white;
+    
+}
+
+.DestinosCard-Button {
+    width: 20%;
+     /* Tomará el espacio necesario */
+    /* Puedes personalizar el botón aquí según lo que necesites */
+}
+
+.DestinosCard-Text {
+    flex: 2; /* Tomará el doble del espacio que el botón y la imagen */
+    text-align: left; /* Justificado a la izquierda */
+    padding: 0 10px; /* Espaciado entre el texto y los otros elementos */
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
+}
+
+.DestinosCard-ImageContainer {
+     /* Tomará el espacio necesario */
+    display: flex;
+    justify-content: flex-start; /* Alinea la imagen a la derecha del contenedor */
+
+}
+
+.DestinosCard-Image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}

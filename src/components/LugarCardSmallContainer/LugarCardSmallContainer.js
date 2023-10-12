@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
-import LugarCardSmall from './LugarCardSmall';
-import './styles.css';
+import LugarCardSmall from '../LugarCardSmall/LugarCardSmall';
+import './LugarCardSmallContainer.css';
 import nextIcon from '../../assets/icons/arrowIconRight.png';
 import prevIcon from '../../assets/icons/arrowIconLeft.png';
 import VisibilitySensor from 'react-visibility-sensor'; // Añade esto
 import FilterList from '../FilterList/FilterList'
 import { FilterContext } from '../../context/filters';
+import { Button } from 'react-scroll';
+import CurrentAdventureContent from '../CurrentAdventureContent/CurrentAdventureContent';
 
 function SearchingTerm(data) {
   const { filterCategories } = useContext(FilterContext);
@@ -54,30 +56,45 @@ function LugarCardSmallContainer() {
     fetchData();
   }, [currentPage]);
 
+  const [selectedPlaces, setSelectedPlaces] = useState([]);  // Estado para almacenar los lugares seleccionados
+
+  const handlePlaceSelection = (placeData) => {
+    setSelectedPlaces(prevPlaces => [...prevPlaces, placeData]);
+  };
+  const handleRemoveSelectedPlace = (placeName) => {
+    const newPlaces = selectedPlaces.filter(place => place.nombre !== placeName);
+    setSelectedPlaces(newPlaces);
+  };
+  
   return (
     <div className='mainContainer1'>
       <h1 className="headerText1">EXPERIENCIAS QUE NO TE PUEDES PERDER!</h1>
       <div className="headerLine1"></div>
       <FilterList />
-      <div className="CardSmallContainer">
-        {dataFilter.slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
-          <VisibilitySensor key={index} partialVisibility>
-            {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} />}
-          </VisibilitySensor>
-        ))}
-        {dataFilter.length === 0 && (
-          <p style={{ height: '800px' }}>No se encontraron resultados.</p>
-        )}
-        <div className="pagination">
-          <button
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
-            disabled={currentPage === 0}
-          >
-            <img src={prevIcon} alt="Anterior" />
-          </button>
-          <button onClick={() => setCurrentPage(prev => prev + 1)}>
-            <img src={nextIcon} alt="Siguiente" />
-          </button>
+      <div className='LugarCardSmallContainer-ContainerAndCurrent'>
+        <div className='CurrentAdventureContent'>
+          <CurrentAdventureContent selectedPlaces={selectedPlaces} onRemoveSelectedPlace={handleRemoveSelectedPlace}/>
+        </div>
+        <div className="CardSmallContainer">
+          {dataFilter.slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
+            <VisibilitySensor key={index} partialVisibility>
+              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} onSelectPlace={handlePlaceSelection}/>}
+            </VisibilitySensor>
+          ))}
+          {dataFilter.length === 0 && (
+            <p style={{ height: '800px' }}>No se encontraron resultados.</p>
+          )}
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
+              disabled={currentPage === 0}
+            >
+              <img src={prevIcon} alt="Anterior" />
+            </button>
+            <button onClick={() => setCurrentPage(prev => prev + 1)}>
+              <img src={nextIcon} alt="Siguiente" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

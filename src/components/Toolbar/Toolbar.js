@@ -27,12 +27,16 @@ function Toolbar({correoUsuario}) {
         <input type="text" placeholder="Busca tu propia aventura" />
       </div>
 
-      <Link to='/mapPage'>
+      {/* <Link to='/mapPage'>
                 <button className="btn-crear">
                     <img src={plusIcon} alt="Icono Crear" className="btn-icon" />
                     Crear
                 </button>
-      </Link>
+      </Link> */}
+      <div className='ToolBar-Buttons'>
+            <button className="btn-crear">Tus Rutas</button>
+
+        </div>
       <button onClick={salir}>
                   Salir
       </button>

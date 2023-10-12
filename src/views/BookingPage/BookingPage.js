@@ -6,7 +6,7 @@ import LugarCardLarge from '../../components/LugarCardLarge/LugarCardLarge';// A
 import './BookingPage.css'
 import 'firebase/database';
 import AddData from '../../components/AddData/AddData';
-import LugarCardSmallContainer from '../../components/LugarCardSmall/LugarCardSmallContainer';
+import LugarCardSmallContainer from '../../components/LugarCardSmallContainer/LugarCardSmallContainer';
 import './BookingPage.css';
 import BookingGuideCard from '../../components/BookingGuideCard/BookingGuideCard';
 import { collection, getDocs } from 'firebase/firestore';
