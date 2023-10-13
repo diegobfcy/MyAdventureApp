@@ -22,10 +22,6 @@ function Toolbar({correoUsuario}) {
       <Link to='/'>
         <img src={logo} alt="Logo" className='logo' />
       </Link> 
-      <div className="search-bar">
-        <FaSearch className="search-icon" />
-        <input type="text" placeholder="Busca tu propia aventura" />
-      </div>
 
       {/* <Link to='/mapPage'>
                 <button className="btn-crear">
@@ -34,16 +30,17 @@ function Toolbar({correoUsuario}) {
                 </button>
       </Link> */}
       <div className='ToolBar-Buttons'>
-            <button className="btn-crear">Tus Rutas</button>
+        <button className="btn-crear">Tus Rutas</button>
+        <button onClick={salir}>
+          Salir
+        </button>
+        <button className="btn-perfil">
+          <img src={profileIcon} alt="Perfil" className="profile-icon" />
+        </button>
+      </div>
 
-        </div>
-      <button onClick={salir}>
-                  Salir
-      </button>
 
-      <button className="btn-perfil">
-        <img src={profileIcon} alt="Perfil" className="profile-icon" />
-      </button>
+
     </div>
     <label>{correoUsuario}</label>
     </>

@@ -89,8 +89,8 @@
   }
   .cardButtons {
     display: flex;
-    gap: 10px;  /* Espacio entre botones */
-    margin-top: 10px; /* Espacio superior para separación */
+    gap: 10px;  
+    margin-top: 10px; 
     align-items: center;
     justify-content: center;
  }
@@ -100,11 +100,18 @@
     color: white;
     border: none;
     border-radius: 20px;
-    padding: 5px 10px;  /* Padding interno para que el botón tenga un buen tamaño */
-    cursor: pointer;  /* Cambiar el cursor al pasar el mouse sobre el botón */
-    transition: 0.3s; /* Animación suave al cambiar el estado del botón */
+    padding: 5px 10px;  
+    cursor: pointer;  
+    transition: 0.3s; 
  }
  
  .customButton:hover {
-    background-color: #632240;  /* Color más oscuro al pasar el mouse sobre el botón */
+    background-color: #632240;
  }
+ @media (max-width: 767.98px) {
+  .lugarCardSmall {
+      width: 80%;
+      margin-left: 0;
+      margin-right: 0;
+  }
+}

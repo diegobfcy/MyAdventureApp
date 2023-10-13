@@ -6,18 +6,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(128, 128, 128, 0.7); /* Gris transparente */
+    background-color: rgba(128, 128, 128, 0.7); 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegurarse de que aparezca encima de otros contenidos */
+    z-index: 1000; 
   }
   
   .CardMasInformacion-infoContainer {
     background-color: white;
     border-radius: 20px;
     padding: 20px;
-    width: 80%; /* O el ancho que prefieras */
+    width: 80%; 
     height: 60%;
     position: relative;
   }

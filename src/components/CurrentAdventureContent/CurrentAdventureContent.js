@@ -1,6 +1,6 @@
 // CurrentAdventureContent.jsx
 import React, { useState, useEffect } from 'react';
-import './CurrentAdventureContent.css';  // Importamos el CSS
+import './CurrentAdventureContent.css'; 
 import DestinosCard from '../DestinosCard/DestinosCard';
 
 const CurrentAdventureContent = ({selectedPlaces, onRemoveSelectedPlace}) => {
@@ -72,13 +72,13 @@ const CurrentAdventureContent = ({selectedPlaces, onRemoveSelectedPlace}) => {
                     Confirmar Ruta
                 </button>
             </div>
-            <div className='CurrentAdventureContent-Container-Relative'>
-                <div className='CurrentAdventureContent-Container-DestinosCardContainer'>
-                    {selectedPlaces.map((place, index) => (
-                        <DestinosCard key={index} imageUrl={place.imagen[0]} text={place.nombre} onRemove={() => handleRemovePlace(place.nombre)} />
-                    ))}
-                </div>
+            
+            <div className='CurrentAdventureContent-Container-DestinosCardContainer'>
+                {selectedPlaces.map((place, index) => (
+                    <DestinosCard key={index} imageUrl={place.imagen[0]} text={place.nombre} onRemove={() => handleRemovePlace(place.nombre)} />
+                ))}
             </div>
+            
 
         </div>
     );

@@ -1,106 +1,159 @@
 .mainContainer1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 95%;
-    padding: 30px;
-  }
-  
-  .headerText1 {
-    color: #451729;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .headerLine1 {
-    width: 100%;
-    height: 2px;
-    background-color: #792A49;
-    margin-bottom: 20px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.headerText1 {
+  color: #451729;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.headerLine1 {
+  width: 100%;
+  height: 2px;
+  background-color: #792A49;
+  margin-bottom: 20px;
+}
+
+.CardSmallContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: center;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 80px;
+}
+
+.pagination button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.pagination button img {
+  width: 15px;
+  height: auto;
+}
+
+.LugarCardSmallContainer-ContainerAndCurrent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+}
+
+.filters {
+  width: 100%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+.dropdown {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.DestinosCard {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.DestinosCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.CurrentAdventureContent {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  width: 33.3333%;
+  max-width: 33.3333%;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
   .CardSmallContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: center;
-    padding: 20px;
-    position: relative;
-    width: 100%;
-    
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    bottom: 10px; 
-    right: 10px;
-    width: 80px;
-  }
-  
-  .pagination button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .pagination button:disabled {
-    cursor: default;
-    opacity: 0.5;
-  }
-  
-  .pagination button img {
-    width: 15px;
-    height: auto;
-  }
-  .LugarCardSmallContainer-ContainerAndCurrent {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    width: 100%;
-    max-width: 100%;
-  }
-  .filters {
-    width: 100%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
+      padding: 10px;
   }
 
-
-  .dropdown {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
   .DestinosCard {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+      margin: 5px;
+      padding: 10px;
   }
-  
-  .DestinosCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+
+  .pagination {
+      bottom: 5px;
+      right: 5px;
+      width: 70px;
   }
+
+  .pagination button img {
+      width: 13px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .LugarCardSmallContainer-ContainerAndCurrent {
+      flex-direction: column;
+  }
+
   .CurrentAdventureContent {
-    display: flex;
-    justify-content: center;
-    height: fit-content;
-    width: 33.3333%;
-    max-width: 33.3333%;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
   }
+
+  .CardSmallContainer {
+      margin-top: 20px;
+      justify-content: center;
+  }
+
+  .lugarCardSmall {
+      width: 90%;
+      margin-left: 0;
+      margin-right: 0;
+  }
+  .headerText1 {
+    display: none;
+  }
+  .headerLine1 {
+    display: none;
+  }
+
+}

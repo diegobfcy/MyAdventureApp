@@ -2,6 +2,7 @@ import React from 'react';
 import './SobreNosotros.css';
 
 function SobreNosotros() {
+    
     return (
         <div className="SobreNosotrosContainer">
             <div className="SobreNosotrosHeader">Sobre Nosotros</div>

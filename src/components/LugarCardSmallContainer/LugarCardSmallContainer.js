@@ -22,7 +22,7 @@ function SearchingTerm(data) {
   const dataFilter = termFilter.filter(x => {
     return x.precio >= filterCategories.minPrice &&
       (
-        !filterCategories.category || // Si no se selecciona una categoría, no se filtra por categoría
+        !filterCategories.category ||
         filterCategories.category.every((selectedCategory) => x.etiquetas.includes(selectedCategory))
       );
   });
@@ -33,7 +33,7 @@ function SearchingTerm(data) {
 function LugarCardSmallContainer() {
   function changePage(direction) {
     return (e) => {
-      e.preventDefault();  // Evita el comportamiento predeterminado
+      e.preventDefault();
       if (direction === "next") {
         setCurrentPage(prev => prev + 1);
       } else if (direction === "previous") {
@@ -56,7 +56,7 @@ function LugarCardSmallContainer() {
     fetchData();
   }, [currentPage]);
 
-  const [selectedPlaces, setSelectedPlaces] = useState([]);  // Estado para almacenar los lugares seleccionados
+  const [selectedPlaces, setSelectedPlaces] = useState([]);
 
   const handlePlaceSelection = (placeData) => {
     setSelectedPlaces(prevPlaces => [...prevPlaces, placeData]);
@@ -65,7 +65,9 @@ function LugarCardSmallContainer() {
     const newPlaces = selectedPlaces.filter(place => place.nombre !== placeName);
     setSelectedPlaces(newPlaces);
   };
-  
+
+  const [isAccordionOpen, setAccordionOpen] = useState(false);
+
   return (
     <div className='mainContainer1'>
       <h1 className="headerText1">EXPERIENCIAS QUE NO TE PUEDES PERDER!</h1>
@@ -73,12 +75,12 @@ function LugarCardSmallContainer() {
       <FilterList />
       <div className='LugarCardSmallContainer-ContainerAndCurrent'>
         <div className='CurrentAdventureContent'>
-          <CurrentAdventureContent selectedPlaces={selectedPlaces} onRemoveSelectedPlace={handleRemoveSelectedPlace}/>
+          <CurrentAdventureContent selectedPlaces={selectedPlaces} onRemoveSelectedPlace={handleRemoveSelectedPlace} />
         </div>
         <div className="CardSmallContainer">
           {dataFilter.slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
             <VisibilitySensor key={index} partialVisibility>
-              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} onSelectPlace={handlePlaceSelection}/>}
+              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} onSelectPlace={handlePlaceSelection} />}
             </VisibilitySensor>
           ))}
           {dataFilter.length === 0 && (

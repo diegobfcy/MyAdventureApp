@@ -2,8 +2,8 @@
 
 .DestinosCard {
     display: flex;
-    justify-content: space-between; /* Separación entre los elementos */
-    align-items: center; /* Centrado vertical */
+    justify-content: space-between; 
+    align-items: center; 
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px;
@@ -11,19 +11,17 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
     background-color: white;
-    
 }
 
 .DestinosCard-Button {
     width: 20%;
-     /* Tomará el espacio necesario */
-    /* Puedes personalizar el botón aquí según lo que necesites */
+
 }
 
 .DestinosCard-Text {
-    flex: 2; /* Tomará el doble del espacio que el botón y la imagen */
-    text-align: left; /* Justificado a la izquierda */
-    padding: 0 10px; /* Espaciado entre el texto y los otros elementos */
+    flex: 2; 
+    text-align: left; 
+    padding: 0 10px; 
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -31,9 +29,9 @@
 }
 
 .DestinosCard-ImageContainer {
-     /* Tomará el espacio necesario */
+    
     display: flex;
-    justify-content: flex-start; /* Alinea la imagen a la derecha del contenedor */
+    justify-content: flex-start; 
 
 }
 
