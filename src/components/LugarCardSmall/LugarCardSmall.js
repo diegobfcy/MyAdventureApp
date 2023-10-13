@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
-import './LugarCardSmall.css';
+import React,{ useContext , useState } from 'react';
+import './LugarCardSmall.css';  
 import starIcon from '../../assets/icons/starIcon.png';
 import CardMasInformacion from '../CardMasInformacion/CardMasInformacion'
 import ReactDOM from 'react-dom';
-function LugarCardSmall({ data, isVisible, onSelectPlace }) {
+import { CartInfoContext } from '../../context/CartInfoContext';
+
+function LugarCardSmall({ data, isVisible }) {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const { LugarCardAdded , setLugarCardAdded } = useContext( CartInfoContext)
+
+  const OnSelectPlace = (placeData) => {
+    if(!LugarCardAdded.places.includes(placeData)){
+      setLugarCardAdded(
+        prev => ({
+            ...prev,
+            places: [...prev.places, placeData],
+        }));
+    }
+  };
+
   return (
     <div className={`lugarCardSmall ${isVisible ? 'animate-card' : ''}`}>
       <div className="imageContainer" style={{ backgroundImage: `url(${data.imagen[0]})` }}></div>
@@ -24,13 +38,13 @@ function LugarCardSmall({ data, isVisible, onSelectPlace }) {
 
         <p>{data.descripcion}</p>
         <div className="cardButtons">
-          {showMoreInfo && ReactDOM.createPortal(
-            <CardMasInformacion onClose={() => setShowMoreInfo(false)} />,
-            document.body
-          )}
+        {showMoreInfo && ReactDOM.createPortal(
+          <CardMasInformacion onClose={() => setShowMoreInfo(false)} data={data}/>,
+          document.body
+        )}
           <button className="customButton" onClick={() => setShowMoreInfo(true)}>Mas Informacion</button>
-
-          <button className="customButton" onClick={() => onSelectPlace(data)}>Agregar a mi ruta</button>
+        
+          <button className="customButton" onClick={() => OnSelectPlace(data)}>Agregar a mi ruta</button>
         </div>
       </div>
     </div>

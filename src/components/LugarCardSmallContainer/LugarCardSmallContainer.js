@@ -5,9 +5,10 @@ import LugarCardSmall from '../LugarCardSmall/LugarCardSmall';
 import './LugarCardSmallContainer.css';
 import nextIcon from '../../assets/icons/arrowIconRight.png';
 import prevIcon from '../../assets/icons/arrowIconLeft.png';
-import VisibilitySensor from 'react-visibility-sensor'; // Añade esto
+import VisibilitySensor from 'react-visibility-sensor'; 
 import FilterList from '../FilterList/FilterList'
 import { FilterContext } from '../../context/filters';
+import { CartInfoContext } from '../../context/CartInfoContext';
 import { Button } from 'react-scroll';
 import CurrentAdventureContent from '../CurrentAdventureContent/CurrentAdventureContent';
 
@@ -22,7 +23,7 @@ function SearchingTerm(data) {
   const dataFilter = termFilter.filter(x => {
     return x.precio >= filterCategories.minPrice &&
       (
-        !filterCategories.category ||
+        !filterCategories.category || 
         filterCategories.category.every((selectedCategory) => x.etiquetas.includes(selectedCategory))
       );
   });
@@ -31,17 +32,6 @@ function SearchingTerm(data) {
 }
 
 function LugarCardSmallContainer() {
-  function changePage(direction) {
-    return (e) => {
-      e.preventDefault();
-      if (direction === "next") {
-        setCurrentPage(prev => prev + 1);
-      } else if (direction === "previous") {
-        setCurrentPage(prev => prev - 1);
-      }
-    }
-  }
-
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [lastDoc, setLastDoc] = useState(null);
@@ -56,15 +46,16 @@ function LugarCardSmallContainer() {
     fetchData();
   }, [currentPage]);
 
-  const [selectedPlaces, setSelectedPlaces] = useState([]);
-
-  const handlePlaceSelection = (placeData) => {
-    setSelectedPlaces(prevPlaces => [...prevPlaces, placeData]);
-  };
-  const handleRemoveSelectedPlace = (placeName) => {
-    const newPlaces = selectedPlaces.filter(place => place.nombre !== placeName);
-    setSelectedPlaces(newPlaces);
-  };
+  function changePage(direction) {
+    return (e) => {
+      e.preventDefault(); 
+      if (direction === "next") {
+        setCurrentPage(prev => prev + 1);
+      } else if (direction === "previous") {
+        setCurrentPage(prev => prev - 1);
+      }
+    }
+  }
 
   const [isAccordionOpen, setAccordionOpen] = useState(false);
 
@@ -75,12 +66,12 @@ function LugarCardSmallContainer() {
       <FilterList />
       <div className='LugarCardSmallContainer-ContainerAndCurrent'>
         <div className='CurrentAdventureContent'>
-          <CurrentAdventureContent selectedPlaces={selectedPlaces} onRemoveSelectedPlace={handleRemoveSelectedPlace} />
+          <CurrentAdventureContent/>
         </div>
         <div className="CardSmallContainer">
           {dataFilter.slice(currentPage * 15, (currentPage + 1) * 15).map((item, index) => (
             <VisibilitySensor key={index} partialVisibility>
-              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item} onSelectPlace={handlePlaceSelection} />}
+              {({ isVisible }) => <LugarCardSmall isVisible={isVisible} data={item}/>}
             </VisibilitySensor>
           ))}
           {dataFilter.length === 0 && (
