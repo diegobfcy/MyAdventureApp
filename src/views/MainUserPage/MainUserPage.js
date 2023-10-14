@@ -12,6 +12,7 @@ import LugarCardSmallContainer from '../../components/LugarCardSmallContainer/Lu
 import { CSSTransition } from 'react-transition-group';
 
 import { FiltersProvider } from '../../context/filters';
+import { CartInfoProvider } from '../../context/CartInfoContext';
 
 function MainUserPage({ correoUsuario }) {
   const [inProp, setInProp] = useState(false);
@@ -29,7 +30,9 @@ function MainUserPage({ correoUsuario }) {
         <LugarCardLarge />
 
         <FiltersProvider>
-          <LugarCardSmallContainer />
+          <CartInfoProvider correoUsuario={correoUsuario}>
+            <LugarCardSmallContainer />
+          </CartInfoProvider>
         </FiltersProvider>
       </div>
     </CSSTransition>
