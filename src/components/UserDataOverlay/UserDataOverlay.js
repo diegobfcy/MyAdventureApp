@@ -9,7 +9,12 @@ import { db } from '../../firebaseConfig';
 
 function UserDataOverlay() {
   const [isVisible, setIsVisible] = useState(true);
-  const { userLogedData, userLogedDataCollection ,setUserLogedDataCollection } = useContext(UserLogedContext);
+  const { 
+    userLogedData, 
+    userLogedDataCollection,
+    setUserLogedDataCollection,
+    setUserLogedData,
+  } = useContext(UserLogedContext);
   const [userMessage, setUserMessage] = useState("");
 
   useEffect(() => {
@@ -28,7 +33,10 @@ function UserDataOverlay() {
   };
 
   const handleSalirClick = async () => {
+
     await signOut(auth);
+    setUserLogedDataCollection(null);
+    setUserLogedData(null);
   };
 
   const handleUserInfo = () =>{
