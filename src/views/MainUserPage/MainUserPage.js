@@ -14,23 +14,25 @@ import { CSSTransition } from 'react-transition-group';
 import { FiltersProvider } from '../../context/filters';
 import { CartInfoProvider } from '../../context/CartInfoContext';
 
-function MainUserPage({ correoUsuario }) {
+function MainUserPage() {
   const [inProp, setInProp] = useState(false);
 
   useEffect(() => {
     setInProp(true);
     return () => setInProp(false); // Esto establecerá el estado inProp en false cuando se desmonte el componente
   }, []);
+
+
   return (
     <CSSTransition in={inProp} timeout={1000} classNames="slide">
 
       <div>
-        <Toolbar correoUsuario={correoUsuario} />
+        <Toolbar />
 
         <LugarCardLarge />
 
         <FiltersProvider>
-          <CartInfoProvider correoUsuario={correoUsuario}>
+          <CartInfoProvider>
             <LugarCardSmallContainer />
           </CartInfoProvider>
         </FiltersProvider>

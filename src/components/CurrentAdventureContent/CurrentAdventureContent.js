@@ -3,12 +3,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import './CurrentAdventureContent.css';  // Importamos el CSS
 import DestinosCard from '../DestinosCard/DestinosCard';
 import { CartInfoContext } from '../../context/CartInfoContext';
+import { UserLogedContext } from '../../context/UserLogedContext';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig'
 
 const CurrentAdventureContent = () => {
     const {LugarCardAdded, setLugarCardAdded, ErrorMessageCart} = useContext(CartInfoContext);
-        const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const {userLogedData} = useContext(UserLogedContext);
 
     //Aqui, selectedPlaces es la variable que tiene los lugares seleccionados, a estos hay que enviarlos con el boton "Confirmar Ruta" junto con la fehcha y la cantidad de personas
     //para que se muestre la ruta a los guias y ellos den su oferta.
@@ -22,11 +24,12 @@ const CurrentAdventureContent = () => {
     const SubmitPlaceCart = () =>{
         const updatedState = {
             ...LugarCardAdded,
+            user: userLogedData.email,
             day: dia,
             month: mes,
             persons: numPersonas,
         };
-
+        
         for (const dato in updatedState) {
             if (updatedState[dato] === 0 || updatedState[dato] === '' || updatedState[dato].length === 0) {
                 setErrorMessage(ErrorMessageCart[dato]);
@@ -67,7 +70,6 @@ const CurrentAdventureContent = () => {
 
     const handleRemovePlace = (placeName) => {
         const newPlaces = LugarCardAdded.places.filter(place => place.nombre !== placeName);
-        console.log(LugarCardAdded.places)
         setLugarCardAdded(prev => ({
             ...prev,
             places: newPlaces,
