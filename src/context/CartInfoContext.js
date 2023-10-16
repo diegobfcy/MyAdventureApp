@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 
 export const CartInfoContext = createContext()
 
-export function CartInfoProvider({ children, correoUsuario }) {
+export function CartInfoProvider({ children }) {
     const [LugarCardAdded, setLugarCardAdded] = useState({
-        user: correoUsuario,
+        user: "",
         places: [],
         day: 0,
         month: 0,

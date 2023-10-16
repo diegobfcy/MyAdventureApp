@@ -9,27 +9,26 @@ import MainPage from './views/MainPage/MainPage';
 import MainUserPage from './views/MainUserPage/MainUserPage';
 import MapPage from './views/MapPage/MapPage';
 import BookingPage from './views/BookingPage/BookingPage';
-import React from 'react';
-
+import React, {useContext} from 'react';
+import { UserLogedContext } from './context/UserLogedContext';
 import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
-  const [usuario, setUsuario] = React.useState(null)
+  const { userLogedData, setUserLogedData, userLogedDataCollection} = useContext( UserLogedContext );
 
   onAuthStateChanged(auth, (usuarioFireBase)=>{
-    if(usuarioFireBase){
-      setUsuario(usuarioFireBase)
-    }else{
-      setUsuario(null)
-    }
+      if(usuarioFireBase)
+          setUserLogedData(usuarioFireBase)
+      else
+          setUserLogedData(null)
   })
-
+  console.log(userLogedDataCollection)
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={usuario ? <MainUserPage correoUsuario={usuario.email} /> : <MainPage />}/>
-        <Route path='/mainUserPage' element={<MainUserPage/>}/>
+        <Route path='/' element={userLogedData ? <MainUserPage /> : <MainPage />}/>
         <Route path='/mapPage' element={<MapPage/>}/>
         <Route path='/bookingPage' element={<BookingPage/>}/>
       </Routes>
@@ -38,3 +37,4 @@ function App() {
 }
 
 export default App;
+

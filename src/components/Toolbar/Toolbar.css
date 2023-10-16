@@ -84,6 +84,10 @@
   transition: background-color 0.3s ease;
 }
 
+.user-message {
+  color: black;
+}
+
 .btn-crear:hover {
   background-color: #B7B7B7;
   color: #FFFFFF;

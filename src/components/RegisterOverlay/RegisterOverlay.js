@@ -2,20 +2,12 @@ import React from 'react';
 import './RegisterOverlay.css';
 import Logo from '../../assets/icons/LogoColor.png';
 import { useState } from 'react';// useEffect 
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword} from 'firebase/auth'; // onAuthStateChanged
 import { db, auth } from '../../firebaseConfig'
 
 
-
-
 function RegisterOverlay({ onClose }){
-    //const [showRegistration, setShowRegistration] = useState(true);
-
-    //const handleClose = () => {
-        //setShowRegistration(false);
-    //};
-    
     const initial = {
         name: '',
         surname: '',
@@ -37,7 +29,6 @@ function RegisterOverlay({ onClose }){
             return;
         }
 
-        console.log(userData);  
         functAutenticacion();
 
         onClose();
@@ -45,10 +36,15 @@ function RegisterOverlay({ onClose }){
 
     const functAutenticacion = async(e) => {
         try {
-            await createUserWithEmailAndPassword (auth, userData.email,userData.password);
-            const user = collection(db, 'Usuario');
-            addDoc(user, userData);
+            const infoUser = await createUserWithEmailAndPassword (auth, userData.email,userData.password)
+            .then((user) => {return user});
+            const user = collection(db, `Usuario`);
+            const userDocRef = doc(user, infoUser.user.uid);
+
+            await setDoc(userDocRef, userData);
+
         } catch (error) {
+            console.log(error)
             alert("No se pudo crear Usuario")
         }
     }
