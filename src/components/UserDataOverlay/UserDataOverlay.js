@@ -6,9 +6,10 @@ import { UserLogedContext } from '../../context/UserLogedContext';
 import profileIcon from '../../assets/icons/perfilIcon.png';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import './UserDataOverlay.css'
 
 function UserDataOverlay() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const { 
     userLogedData, 
     userLogedDataCollection,
@@ -47,19 +48,19 @@ function UserDataOverlay() {
   console.log(userLogedDataCollection)
 
   return (
-    <>
-        <button className="btn-perfil" >
-        <img src={profileIcon} alt="Perfil" className="profile-icon" onClick={handleUserInfo}/>
+    <div className="user-data-container">
+        <button className="btn-perfil" onClick={handleUserInfo}>
+        <img src={profileIcon} alt="Perfil" className="profile-icon" />
         </button>
       {isVisible && (
-        <>
+        <div className='UserDropDownMenu'>
           <button onClick={handleSalirClick}>
             Salir
           </button>
           {userMessage && <div className="user-message">{userMessage}</div>}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
