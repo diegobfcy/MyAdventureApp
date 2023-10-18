@@ -4,7 +4,6 @@ export const CartInfoContext = createContext()
 
 export function CartInfoProvider({ children }) {
     const [LugarCardAdded, setLugarCardAdded] = useState({
-        user: "",
         places: [],
         day: 0,
         month: 0,

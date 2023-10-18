@@ -4,13 +4,14 @@ import './CurrentAdventureContent.css';  // Importamos el CSS
 import DestinosCard from '../DestinosCard/DestinosCard';
 import { CartInfoContext } from '../../context/CartInfoContext';
 import { UserLogedContext } from '../../context/UserLogedContext';
-import { collection, addDoc } from 'firebase/firestore';
+import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig'
 
 const CurrentAdventureContent = () => {
     const {LugarCardAdded, setLugarCardAdded, ErrorMessageCart} = useContext(CartInfoContext);
     const [errorMessage, setErrorMessage] = useState("");
-    const {userLogedData} = useContext(UserLogedContext);
+    const {userLogedData, userLogedDataCollection} = useContext(UserLogedContext);
+    const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',]
 
     //Aqui, selectedPlaces es la variable que tiene los lugares seleccionados, a estos hay que enviarlos con el boton "Confirmar Ruta" junto con la fehcha y la cantidad de personas
     //para que se muestre la ruta a los guias y ellos den su oferta.
@@ -19,37 +20,35 @@ const CurrentAdventureContent = () => {
     const [dias, setDias] = useState(0);     
     const [dia, setDia] = useState(0);
     
-    const [numPersonas, setNumPersonas] = useState(0);
+    const [numPersonas, setNumPersonas] = useState('');
 
     const SubmitPlaceCart = () =>{
         const updatedState = {
             ...LugarCardAdded,
-            user: userLogedData.email,
             day: dia,
             month: mes,
             persons: numPersonas,
         };
         
         for (const dato in updatedState) {
-            if (updatedState[dato] === 0 || updatedState[dato] === '' || updatedState[dato].length === 0) {
+            if (updatedState[dato] <= 0 || updatedState[dato] === '' || updatedState[dato].length === 0) {
                 setErrorMessage(ErrorMessageCart[dato]);
                 return;
             }
         }       
 
         setErrorMessage('');    
-        setLugarCardAdded(prev => ({
-            ...prev,
+        setLugarCardAdded({
             places: [],
             day: 0,
             month: 0,
             persons: 0,
-        }))
-        setDia(0);
+        })
+        setDia("");
         setMes("");
-        setNumPersonas(0);
+        setNumPersonas('');
         
-        createRequestPlaces(updatedState);
+        addRequestTouser(updatedState)
     };
 
     useEffect(() => {
@@ -86,42 +85,45 @@ const CurrentAdventureContent = () => {
         }
     }
 
-    const createRequestPlaces = async(place) =>{
+    const addRequestTouser = async (updatedState) => {
         try {
-            const request = collection(db, 'RequestPlaces');
-            await addDoc(request, place);
+            const userRef = doc(db, 'Usuario', userLogedData.uid)
+            const currentRequests = userLogedDataCollection.request || [];
+            const updatedRequests = [...currentRequests, updatedState]; 
+
+            const updatedData = { request: updatedRequests }; 
+             await updateDoc(userRef, updatedData);
         } catch (error) {
-            alert("No se pudo crear la peticion")
+            console.log(error)
         }
     }
 
     return (
         <div className='CurrentAdventureContent-Container'>
             <div className='CurrentAdventureContent-Container-FechaCantidad'>
-                <select className="dropdown" name="dia" defaultValue="" onChange={(e) => setDia(e.target.value)}>
+                <select className="dropdown" name="dia" value={dia || ""} onChange={(e) => setDia(e.target.value)}>
                     <option value="" disabled>Día</option>
                     {[...Array(dias).keys()].map((dia) => (
                         <option key={dia + 1} value={dia + 1}>{dia + 1}</option>
                     ))}
                 </select>
 
-                <select className="dropdown" name="mes" defaultValue="" onChange={(e) => setMes(e.target.value)}>
+                <select className="dropdown" name="mes" value={mes || ""} onChange={(e) => setMes(e.target.value)}>
                     <option value="" disabled>Mes</option>
-                    <option value="Enero">Enero</option>
-                    <option value="Febrero">Febrero</option>
-                    <option value="Marzo">Marzo</option>
-                    <option value="Abril">Abril</option>
-                    <option value="Mayo">Mayo</option>
-                    <option value="Junio">Junio</option>
-                    <option value="Julio">Julio</option>
-                    <option value="Agosto">Agosto</option>
-                    <option value="Septiembre">Septiembre</option>
-                    <option value="Octubre">Octubre</option>
-                    <option value="Noviembre">Noviembre</option>
-                    <option value="Diciembre">Diciembre</option>
-
+                    {months.map((mes) => (
+                        <option key={mes} value={mes}>
+                            {mes}
+                        </option>
+                    ))}
                 </select>
-                <input className='CurrentAdventure-PersonasInput' type="number" name="cantidadPersonas" placeholder="Personas" onChange={handleNumPersons} />
+                <input 
+                    className='CurrentAdventure-PersonasInput' 
+                    type="number" 
+                    name="cantidadPersonas" 
+                    placeholder="Personas" 
+                    onChange={handleNumPersons} 
+                    value={ numPersonas }
+                />
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
             </div>
             <div className='CurrentAdventureContent-Container-BotonConfirmarRutaContainer'>
