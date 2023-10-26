@@ -38,6 +38,7 @@ function UserDataOverlay() {
     await signOut(auth);
     setUserLogedDataCollection(null);
     setUserLogedData(null);
+    window.localStorage.clear();
   };
 
   const handleUserInfo = () =>{

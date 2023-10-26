@@ -1,42 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-import Toolbar from './components/Toolbar/Toolbar';
-import './index.css';
-import LugarCardLarge from './components/LugarCardLarge/LugarCardLarge';
-import {BrowserRouter , Route, Routes } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import MainPage from './views/MainPage/MainPage';
 import MainUserPage from './views/MainUserPage/MainUserPage';
 import MapPage from './views/MapPage/MapPage';
 import BookingPage from './views/BookingPage/BookingPage';
-import React, {useContext} from 'react';
+import AuthContainer from './components/AuthContainer/AuthContainer';
+import {AuthUserRoutes} from './components/AuthUserRoutes/AuthUserRoutes';
 import { UserLogedContext } from './context/UserLogedContext';
+
+import { PrivateRoutes, PublicRoutes } from './routes';
+
 import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth';
 import OfertaRutaPage from './views/OfertaRutaPage/OfertaRutaPage';
 
-function App() {
-  const { userLogedData, setUserLogedData, userLogedDataCollection} = useContext( UserLogedContext );
 
-  onAuthStateChanged(auth, (usuarioFireBase)=>{
-      if(usuarioFireBase)
-          setUserLogedData(usuarioFireBase)
-      else
-          setUserLogedData(null)
-  })
-  console.log(userLogedDataCollection)
-  
+function App() {
+  const { userLogedData } = useContext(UserLogedContext); 
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={userLogedData ? <MainUserPage /> : <MainPage />}/>
-        <Route path='/mapPage' element={<MapPage/>}/>
-        <Route path='/bookingPage' element={<BookingPage/>}/>
-        <Route path='/ofertaRuta' element={<OfertaRutaPage/>} />
-      </Routes>
-    </BrowserRouter>
+
+    <Router>
+      <AuthContainer>
+        <Routes>
+            <Route path={PublicRoutes.MAINPAGE} element={userLogedData ? <Navigate to={PrivateRoutes.USERPAGE}/> : <MainPage/>} />
+            <Route path='*' element={<h1>Not Found</h1>} />
+          <Route element={<AuthUserRoutes />}>
+            <Route path={PrivateRoutes.USERPAGE} element={<MainUserPage />} />
+            <Route path={PrivateRoutes.MAPPAGE} element={<MapPage />} />
+            <Route path={PrivateRoutes.BOOKINGPAGE} element={<BookingPage />} />
+          </Route>
+        </Routes>
+      </AuthContainer>
+    </Router>
+
   );
 }
 
 export default App;
-
