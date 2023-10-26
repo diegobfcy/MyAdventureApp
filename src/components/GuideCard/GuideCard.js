@@ -21,8 +21,6 @@ function GuideCard({data}) {
         // Si no es así, el click en el botón con el Link debería ser suficiente.
         // history.push('/bookingPage');
     }
-    
-
     return (
         <div className="guide-card">
             <div className="guide-card-row">

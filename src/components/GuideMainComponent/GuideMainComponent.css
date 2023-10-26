@@ -1,0 +1,11 @@
+.GuideMainComponent {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 100px); /* Asumiendo que quieres que ocupe toda la altura de la ventana */
+  }
+  
+  .GuideMainComponent-RutasPendientes, .GuideMainComponent-RutasDisponibles {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd; /* Sólo para visualización, puedes quitarlo */
+  }

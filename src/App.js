@@ -13,6 +13,7 @@ import React, {useContext} from 'react';
 import { UserLogedContext } from './context/UserLogedContext';
 import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth';
+import OfertaRutaPage from './views/OfertaRutaPage/OfertaRutaPage';
 
 function App() {
   const { userLogedData, setUserLogedData, userLogedDataCollection} = useContext( UserLogedContext );
@@ -31,6 +32,7 @@ function App() {
         <Route path='/' element={userLogedData ? <MainUserPage /> : <MainPage />}/>
         <Route path='/mapPage' element={<MapPage/>}/>
         <Route path='/bookingPage' element={<BookingPage/>}/>
+        <Route path='/ofertaRuta' element={<OfertaRutaPage/>} />
       </Routes>
     </BrowserRouter>
   );
