@@ -7,13 +7,19 @@ import BookingPage from './views/BookingPage/BookingPage';
 import AuthContainer from './components/AuthContainer/AuthContainer';
 import {AuthUserRoutes} from './components/AuthUserRoutes/AuthUserRoutes';
 import { UserLogedContext } from './context/UserLogedContext';
+
 import { PrivateRoutes, PublicRoutes } from './routes';
+
+import { auth } from './firebaseConfig'
+import { onAuthStateChanged } from 'firebase/auth';
+import OfertaRutaPage from './views/OfertaRutaPage/OfertaRutaPage';
 
 
 function App() {
   const { userLogedData } = useContext(UserLogedContext); 
 
   return (
+
     <Router>
       <AuthContainer>
         <Routes>
@@ -27,6 +33,7 @@ function App() {
         </Routes>
       </AuthContainer>
     </Router>
+
   );
 }
 

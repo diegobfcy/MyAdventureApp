@@ -10,7 +10,7 @@ import { collection, getDoc } from 'firebase/firestore';
 import { getDocs } from 'firebase/firestore';
 import LugarCardSmallContainer from '../../components/LugarCardSmallContainer/LugarCardSmallContainer';
 import { CSSTransition } from 'react-transition-group';
-import GuideOverlay from '../../components/GuideOverlay/GuideOverlay';
+import GuideMainComponent from '../../components/GuideMainComponent/GuideMainComponent';
 
 import { FiltersProvider } from '../../context/filters';
 import { CartInfoProvider } from '../../context/CartInfoContext';
@@ -48,7 +48,7 @@ function MainUserPage() {
             </FiltersProvider>
           </>
         ) : (
-          <GuideOverlay />
+          <GuideMainComponent />
         )}
       </div>
     </CSSTransition>

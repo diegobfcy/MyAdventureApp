@@ -17,7 +17,7 @@ function MapPage() {
 
     useEffect(() => {
       setInProp(true);
-      return () => setInProp(false); // Esto establecerá el estado inProp en false cuando se desmonte el componente
+      return () => setInProp(false); 
     }, []);
   
   return (
@@ -27,7 +27,7 @@ function MapPage() {
 
           <div className="mapPage">
             <Map />
-            {/* otros componentes si los hay */}
+            
         </div>
 
       </div>
