@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useContext } from 'react';
 import './GuideRutasDisponiblesCard.css';
-import { Link } from 'react-router-dom';
-import OfertaRutaPage from '../../views/OfertaRutaPage/OfertaRutaPage';
+import { useNavigate } from 'react-router-dom';
+import { PlaceOfertContext } from "../../context/PlaceOfertContext";
+import { PrivateRoutes } from '../../routes';
+import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
-const GuideRutasDisponiblesCard = ({ fecha, nombre, cantidad }) => {
+const GuideRutasDisponiblesCard = ({ data }) => {
+  const { setPlacesOfert } = useContext(PlaceOfertContext)
+  const { setIsOfert } = useContext(RoutesFlagsContext)
+  const fecha = `${data.day}-${data.month}-2023`;
+  const cantidad = data.persons;
+  const nombre = data.username;
+  const navigate = useNavigate();
+  
+  const handleMoreInfo = () =>{
+    setPlacesOfert(data);
+    setIsOfert(true);
+    navigate(`../${PrivateRoutes.OFERTROUTE}`);
+  }
+
   return (
     <div className="GuideRutasDisponiblesCard-card-container">
       <div className="GuideRutasDisponiblesCard-card-row">
@@ -19,9 +34,7 @@ const GuideRutasDisponiblesCard = ({ fecha, nombre, cantidad }) => {
         <span>{cantidad}</span>
       </div>
       <div className="GuideRutasDisponiblesCard-card-row">
-        <Link to="/ofertaRuta">
-            <button className="GuideRutasDisponiblesCard-btn">Mas detalles y dar oferta</button>
-        </Link>
+        <button className="GuideRutasDisponiblesCard-btn" onClick={handleMoreInfo}>Mas detalles y dar oferta</button>
       </div>
     </div>
   );

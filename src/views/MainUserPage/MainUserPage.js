@@ -15,6 +15,7 @@ import GuideMainComponent from '../../components/GuideMainComponent/GuideMainCom
 import { FiltersProvider } from '../../context/filters';
 import { CartInfoProvider } from '../../context/CartInfoContext';
 import { UserLogedContext } from '../../context/UserLogedContext';
+import { PlaceOfertProvider } from '../../context/PlaceOfertContext';
 
 function MainUserPage() {
   const [inProp, setInProp] = useState(false);
@@ -37,7 +38,6 @@ function MainUserPage() {
 
       <div>
         <Toolbar />
-
         { rol === "" ? (
           <>
             <LugarCardLarge />
