@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { PublicRoutes } from '../../routes';
+import { PrivateRoutes, PublicRoutes } from '../../routes';
+import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
 export const AuthUserRoutes = () => {
-  return window.localStorage.getItem('user') ? <Outlet /> : <Navigate replace to={PublicRoutes.MAINPAGE} />;
+  const { isLoged } = useContext(RoutesFlagsContext);
+
+  return isLoged ? <Outlet /> : <Navigate replace to={PublicRoutes.MAINPAGE} />;
 };
+
+export const AuthOfertRoute = () =>{
+  const { isOfert } = useContext(RoutesFlagsContext);
+  console.log(isOfert)
+
+  return isOfert ? <Outlet /> : <Navigate replace to={PrivateRoutes.USERPAGE} />;
+}

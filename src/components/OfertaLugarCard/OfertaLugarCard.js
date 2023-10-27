@@ -6,7 +6,7 @@ function OfertaLugarCard({data}) {
         <div className="OfertaLugarCard">
             <div className="OfertaLugarCard-row">
                 <div className="OfertaLugarCard-image-container">
-                    <img src={data.urlImagen} alt="Lugar" className="OfertaLugarCard-image"/>  {/* Corregido aquí */}
+                    <img src={data.imagen} alt="Lugar" className="OfertaLugarCard-image"/>  {/* Corregido aquí */}
                 </div>
                 <div className="OfertaLugarCard-name">
                     <span>{data.nombre}</span>

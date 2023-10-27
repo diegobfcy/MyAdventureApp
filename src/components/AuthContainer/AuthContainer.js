@@ -2,19 +2,18 @@ import { UserLogedContext } from "../../context/UserLogedContext";
 import {useContext, useEffect} from 'react';
 import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
+import { PlaceOfertProvider } from '../../context/PlaceOfertContext';
+import { RoutesFlagsContext } from "../../context/RoutesFlagsContext";
 
 function AuthContainer({ children }) {
   const { setUserLogedData } = useContext(UserLogedContext);
+  const { setIsLoged } = useContext(RoutesFlagsContext);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (usuarioFireBase) => {
       if (usuarioFireBase) {
         setUserLogedData(usuarioFireBase);
-        try{
-          window.localStorage.setItem("user", true)
-        }catch (error){
-          console.log(error);
-        }
+        setIsLoged(true);
       } else {
         setUserLogedData(null);
       }
@@ -23,7 +22,11 @@ function AuthContainer({ children }) {
     return () => unsubscribe();
   }, [setUserLogedData]);
  
-  return children;
+  return (
+    <PlaceOfertProvider>
+      {children}
+    </PlaceOfertProvider>
+  );
 };
 
 export default AuthContainer;

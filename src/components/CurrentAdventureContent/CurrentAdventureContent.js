@@ -4,13 +4,13 @@ import './CurrentAdventureContent.css';  // Importamos el CSS
 import DestinosCard from '../DestinosCard/DestinosCard';
 import { CartInfoContext } from '../../context/CartInfoContext';
 import { UserLogedContext } from '../../context/UserLogedContext';
-import { updateDoc, doc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebaseConfig'
 
 const CurrentAdventureContent = () => {
     const {LugarCardAdded, setLugarCardAdded, ErrorMessageCart} = useContext(CartInfoContext);
     const [errorMessage, setErrorMessage] = useState("");
-    const {userLogedData, userLogedDataCollection} = useContext(UserLogedContext);
+    const {userLogedData, userLogedDataCollection } = useContext(UserLogedContext);
     const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',]
 
     //Aqui, selectedPlaces es la variable que tiene los lugares seleccionados, a estos hay que enviarlos con el boton "Confirmar Ruta" junto con la fehcha y la cantidad de personas
@@ -25,9 +25,12 @@ const CurrentAdventureContent = () => {
     const SubmitPlaceCart = () =>{
         const updatedState = {
             ...LugarCardAdded,
+            user: userLogedData.email,
+            username: `${userLogedDataCollection.name || ""} ${userLogedDataCollection.surname || ""}`,
             day: dia,
             month: mes,
             persons: numPersonas,
+            status: 'waitForGuide',
         };
         
         for (const dato in updatedState) {
@@ -48,7 +51,7 @@ const CurrentAdventureContent = () => {
         setMes("");
         setNumPersonas('');
         
-        addRequestTouser(updatedState)
+        createRequestPlaces(updatedState)
     };
 
     useEffect(() => {
@@ -85,14 +88,11 @@ const CurrentAdventureContent = () => {
         }
     }
 
-    const addRequestTouser = async (updatedState) => {
+     const createRequestPlaces = async(place) =>{
         try {
-            const userRef = doc(db, 'Usuario', userLogedData.uid)
-            const currentRequests = userLogedDataCollection.request || [];
-            const updatedRequests = [...currentRequests, updatedState]; 
+            const request = collection(db, 'RequestPlaces');
+            await addDoc(request, place);
 
-            const updatedData = { request: updatedRequests }; 
-             await updateDoc(userRef, updatedData);
         } catch (error) {
             console.log(error)
         }

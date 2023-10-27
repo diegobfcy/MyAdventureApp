@@ -7,8 +7,10 @@ import profileIcon from '../../assets/icons/perfilIcon.png';
 import { collection, getDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import './UserDataOverlay.css'
+import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
 function UserDataOverlay() {
+  const { setIsLoged } = useContext(RoutesFlagsContext);
   const [isVisible, setIsVisible] = useState(false);
   const { 
     userLogedData, 
@@ -38,7 +40,7 @@ function UserDataOverlay() {
     await signOut(auth);
     setUserLogedDataCollection(null);
     setUserLogedData(null);
-    window.localStorage.clear();
+    setIsLoged(false);
   };
 
   const handleUserInfo = () =>{
@@ -46,7 +48,7 @@ function UserDataOverlay() {
   }
 
   //En esta variable esta la informacion de la coleccion del usuario 
-  console.log(userLogedDataCollection)
+  //console.log(userLogedDataCollection)
 
   return (
     <div className="user-data-container">
