@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PlaceOfertContext } from '../../context/PlaceOfertContext';
 import { UserLogedContext } from '../../context/UserLogedContext';
 import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore' 
+import { doc, updateDoc} from 'firebase/firestore' 
 import { db } from '../../firebaseConfig'
 import './OfertaLugarCardContainer.css';
 import { PrivateRoutes } from '../../routes';
@@ -12,10 +12,13 @@ import { PrivateRoutes } from '../../routes';
 function OfertaLugarCardContainer({ isVisible, onClose }) {
     const { placesOfert, setPlacesOfert } = useContext( PlaceOfertContext);
     const { setIsOfert } = useContext(RoutesFlagsContext)
-    const [ofertaValue, setOfertaValue] = useState('');
-    const [transporte, setTransporte] = useState('sin transporte');
-    const [errorMessage, setErrorMessage] = useState("");
     const { userLogedDataCollection } = useContext(UserLogedContext)
+    const UserEmail = userLogedDataCollection.email;
+
+    const [ofertaValue, setOfertaValue] = useState(placesOfert.offered ? placesOfert.oferts[UserEmail].price : '');
+    const [transporte, setTransporte] = useState(placesOfert.offered ? placesOfert.oferts[UserEmail].transport : 'sin transporte');
+    const [errorMessage, setErrorMessage] = useState("");
+
     const navigate = useNavigate();
 
     const animationClass = isVisible ? 'slideIn' : 'slideOut';
@@ -34,23 +37,22 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
                 transport: transporte,
                 username: `${userLogedDataCollection.name} ${userLogedDataCollection.surname}`, 
                 email: userLogedDataCollection.email,
-            }
-            updateRequestOfert(ofert)
-            navigate(`../${PrivateRoutes.USERPAGE}`);
-            setPlacesOfert({
-                places: [],
-            });
-            setIsOfert(false);
+            };
+            placesOfert.offered ? updateRequestOfert(ofert) : updateOfert(ofert);
+            resetOFert();
         }
     };
+
 
     const updateRequestOfert = async (updatedState) => {
         try {
             const requestRef = doc(db, 'RequestPlaces', placesOfert.id);
             const updatedData = {
-                oferts: arrayUnion(updatedState) 
+                oferts: {
+                    ...placesOfert.ofert,
+                    [updatedState.email]: updatedState
+                } 
             };
-
             await updateDoc(requestRef, updatedData);
             setOfertaValue('');
         } catch (error) {
@@ -58,6 +60,28 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
         }
     }
 
+    const updateOfert = async (updatedState) => {
+        try {
+            const requestRef = doc(db, 'RequestPlaces', placesOfert.id);
+            const updatedData = {
+                oferts: {
+                    [updatedState.email]: updatedState
+                } 
+            };
+            await updateDoc(requestRef, updatedData);
+            setOfertaValue('');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const resetOFert = () => {
+        navigate(`../${PrivateRoutes.USERPAGE}`);
+            setPlacesOfert({
+                places: [],
+            });
+        setIsOfert(false);
+    }
 
     return (
         <div className={`OfertaLugarCardContainer-card-container ${animationClass}`}>
@@ -96,6 +120,9 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
             <div className='OfertaLugarCardContainer-enviarOfertaBtn'>
                 <button className="OfertaLugarCardContainer-OfertaBtn" onClick={handleSendOfert}>
                     Enviar Oferta
+                </button>
+                <button className="OfertaLugarCardContainer-OfertaBtn" onClick={resetOFert}>
+                    Cancelar
                 </button>
             </div>
             <div className="OfertaLugarCardContainer-divider"></div>

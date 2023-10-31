@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const RoutesFlagsContext = createContext()
 
 export function RoutesFlagsProvider({ children }) {
-    const [isLoged, setIsLoged] = useState(false);
+    const [isLoged, setIsLoged] = useState(true);
     const [isOfert, setIsOfert] = useState(false);
     return (
         <RoutesFlagsContext.Provider value={{
