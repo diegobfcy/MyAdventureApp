@@ -5,7 +5,7 @@ import { PlaceOfertContext } from "../../context/PlaceOfertContext";
 import { PrivateRoutes } from '../../routes';
 import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
-const GuideRutasDisponiblesCard = ({ data }) => {
+const GuideRutasDisponiblesCard = ({ data, offered }) => {
   const { setPlacesOfert } = useContext(PlaceOfertContext)
   const { setIsOfert } = useContext(RoutesFlagsContext)
   const fecha = `${data.day}-${data.month}-2023`;
@@ -14,13 +14,13 @@ const GuideRutasDisponiblesCard = ({ data }) => {
   const navigate = useNavigate();
   
   const handleMoreInfo = () =>{
-    setPlacesOfert(data);
+    setPlacesOfert({...data, offered: offered});
     setIsOfert(true);
     navigate(`../${PrivateRoutes.OFERTROUTE}`);
   }
 
   return (
-    <div className="GuideRutasDisponiblesCard-card-container">
+    <div className="GuideRutasDisponiblesCard-card-container" style={{ backgroundColor: offered ? '#76EB7A' : 'initial' }}>
       <div className="GuideRutasDisponiblesCard-card-row">
         <span>Fecha:</span>
         <span>{fecha}</span>
@@ -33,9 +33,15 @@ const GuideRutasDisponiblesCard = ({ data }) => {
         <span>Cantidad de personas:</span>
         <span>{cantidad}</span>
       </div>
-      <div className="GuideRutasDisponiblesCard-card-row">
-        <button className="GuideRutasDisponiblesCard-btn" onClick={handleMoreInfo}>Mas detalles y dar oferta</button>
-      </div>
+      {offered ? (
+        <div className="GuideRutasDisponiblesCard-card-row">
+          <button className="GuideRutasDisponiblesCard-btn" onClick={handleMoreInfo}>Editar Oferta</button>
+        </div>
+      ) : (
+        <div className="GuideRutasDisponiblesCard-card-row">
+          <button className="GuideRutasDisponiblesCard-btn" onClick={handleMoreInfo}>Mas detalles y dar oferta</button>
+        </div>
+      )}
     </div>
   );
 };

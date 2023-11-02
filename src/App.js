@@ -23,9 +23,9 @@ function App() {
               <Route path={PublicRoutes.MAINPAGE} element={userLogedData ? <Navigate to={PrivateRoutes.USERPAGE}/> : <MainPage/>} />
               <Route path='*' element={<h1>Not Found</h1>} />
             <Route element={<AuthUserRoutes />}>
-              <Route path={PrivateRoutes.USERPAGE} element={<MainUserPage />} />
-              <Route path={PrivateRoutes.MAPPAGE} element={<MapPage />} />
-              <Route path={PrivateRoutes.BOOKINGPAGE} element={<BookingPage />} />
+              <Route path={PrivateRoutes.USERPAGE} element={userLogedData ? <MainUserPage /> : <Navigate to={PublicRoutes.MAINPAGE}/>}/>
+              <Route path={PrivateRoutes.MAPPAGE} element={userLogedData ? <MapPage /> : <Navigate to={PublicRoutes.MAINPAGE}/>} />
+              <Route path={PrivateRoutes.BOOKINGPAGE} element={userLogedData ? <BookingPage /> : <Navigate to={PublicRoutes.MAINPAGE}/>} />
               <Route element={<AuthOfertRoute/>}>
                 <Route path={PrivateRoutes.OFERTROUTE} element={<OfertaRutaPage/>} />
               </Route>

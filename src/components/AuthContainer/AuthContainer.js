@@ -16,6 +16,7 @@ function AuthContainer({ children }) {
         setIsLoged(true);
       } else {
         setUserLogedData(null);
+        setIsLoged(false);
       }
     });
 

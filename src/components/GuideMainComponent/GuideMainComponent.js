@@ -5,28 +5,42 @@ import GuideRutasPendientesCard from "../GuideRutasPendientesCard/GuideRutasPend
 import GuideRutasDisponiblesCard from "../GuideRutasDisponiblesCard/GuideRutasDisponiblesCard";
 import './GuideMainComponent.css';
 import { UserLogedContext } from "../../context/UserLogedContext";
-
+ 
 function GuideOverlay() {
-  const [dataDisponibles, setDataDisponibles] = useState([]);
+  const [dataDisponible, setDataDisponible] = useState([]);
+  const [dataOffered, setDataOffered] = useState([]);
   const { userLogedData } = useContext(UserLogedContext)
 
   useEffect(() => {
     const fetchDataRutasDisponibles = async () => {
       const q = query(collection(db, 'RequestPlaces'));
       const querySnapshot = await getDocs(q);
-      setDataDisponibles(querySnapshot.docs.map(request => ({
+      const data = querySnapshot.docs.map(request => ({
         ...request.data(),
         id: request.id,
-      })).filter(objeto => {
-          if (objeto.hasOwnProperty("oferts")) {
-              const oferts = objeto.oferts.filter(oferta => oferta.email === userLogedData.email);
-              return oferts.length === 0;
-          }
-          return true;
       }));
+
+      const dataAvaible = filterData(data);
+      setDataDisponible(dataAvaible.notOffered);
+      setDataOffered(dataAvaible.offered);
     }
     fetchDataRutasDisponibles();
   }, []);
+
+  const filterData = (data)=>{
+    const result = data.reduce(
+      (accumulator, objeto) => {
+        if (objeto.hasOwnProperty("oferts") && objeto.oferts.hasOwnProperty(userLogedData.email)) {
+          accumulator.offered.push(objeto) 
+        } else { 
+          accumulator.notOffered.push(objeto);
+        }      
+        return accumulator;
+      },
+      { offered: [], notOffered: [] }
+    );
+    return result;
+  }
 
   return (
     
@@ -44,10 +58,13 @@ function GuideOverlay() {
       </div>
       <div className="GuideMainComponent-RutasDisponibles">
         <div>
-          {dataDisponibles.map((item, key) => (
-            <GuideRutasDisponiblesCard key={key} data={item}/>
+          {dataOffered.map((item, key) => (
+            <GuideRutasDisponiblesCard key={key} data={item} offered={true}/>
           ))}
-          {dataDisponibles.length === 0 && (
+          {dataDisponible.map((item, key) => (
+            <GuideRutasDisponiblesCard key={key} data={item} offered={false}/>
+          ))}
+          {dataDisponible.length === 0 && dataOffered.length === 0 && (
             <p style={{ height: '800px' }}>No hay peticiones disponibles</p>
           )}
         </div>
