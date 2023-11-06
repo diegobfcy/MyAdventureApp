@@ -6,7 +6,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow the items to wrap when necessary */
+  flex-wrap: wrap;
+  /* Allow the items to wrap when necessary */
   padding: 15px;
   background-color: #FFFFFF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -127,35 +128,35 @@
 /* Responsive Styles */
 @media (max-width: 575.98px) {
   .toolbar {
-      justify-content: space-between;
+    justify-content: space-between;
   }
 
   .logo {
-      margin: 5px;
-      max-height: 40px;
+    margin: 5px;
+    max-height: 40px;
   }
 
   .search-bar {
-      margin: 5px 0;
+    margin: 5px 0;
   }
 
   .ToolBar-Buttons {
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 5px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px 0;
   }
 
   .btn-crear {
-      margin: 5px;
+    margin: 5px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .search-bar {
-      margin: 0 100px;
+    margin: 0 100px;
   }
 
   .btn-crear {
-      padding: 8px 15px;
+    padding: 8px 15px;
   }
 }

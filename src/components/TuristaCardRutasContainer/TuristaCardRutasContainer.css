@@ -1,0 +1,53 @@
+.TuristaCardRutasContainerOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.TuristaCardRutasContainer-infoContainer {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 60%;
+    height: 60%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.TuristaCardRutasContainer-closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.TuristaCardRutasContainer-leftContainer,
+.TuristaCardRutasContainer-rightContainer {
+    color: #792A49;
+    width: 48%;
+    /* Aproximadamente la mitad del contenedor principal, con un pequeño espacio entre ellos */
+}
+
+.TuristaCardRutasContainer-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.TuristaCardRutasContainer-cardContainer {
+    /* Aquí puedes agregar estilos para el contenedor de las tarjetas si lo necesitas */
+}
+
+.TuristaCardRutasContainer-closeButton {
+    /* Tus estilos actuales... */
+}
