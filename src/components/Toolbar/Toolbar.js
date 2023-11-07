@@ -8,11 +8,20 @@ import plusIcon from '../../assets/icons/plus 1.png';
 import { Link } from 'react-router-dom';
 import UserDataOverlay from '../UserDataOverlay/UserDataOverlay';
 import TuristaCardRutasContainer from '../TuristaCardRutasContainer/TuristaCardRutasContainer';
+import { UserLogedContext } from '../../context/UserLogedContext';
 
 function Toolbar() {
 
   const [showCardRutasTurista, setShowCardRutasTurista] = useState(false);
+  const { userLogedDataCollection } = useContext(UserLogedContext);
+  const [ rol, setRol ] =  useState("")
 
+  useEffect(() =>{
+    if(userLogedDataCollection && !(userLogedDataCollection.rol === undefined)){
+      setRol(userLogedDataCollection.rol);
+    }
+  }, [userLogedDataCollection]);
+  
   // Función para manejar el click en el botón
   const handleButtonClick = () => {
     setShowCardRutasTurista(true);
@@ -36,12 +45,11 @@ function Toolbar() {
                     Crear
                 </button>
       </Link> */}
-
-        <div className='ToolBar-Buttons'>
-          <button className="btn-crear" onClick={handleButtonClick}>Tus Rutas</button>
-          {showCardRutasTurista && <TuristaCardRutasContainer onClose={handleCloseCard} />}
-          <UserDataOverlay />
-        </div>
+          <div className='ToolBar-Buttons'>
+            { rol === "" && <button className="btn-crear" onClick={handleButtonClick}>Tus Rutas</button>}
+            {showCardRutasTurista && <TuristaCardRutasContainer onClose={handleCloseCard} />}
+            <UserDataOverlay />
+          </div>
       </div>
     </>
   );

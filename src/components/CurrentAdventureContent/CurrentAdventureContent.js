@@ -30,7 +30,7 @@ const CurrentAdventureContent = () => {
             day: dia,
             month: mes,
             persons: numPersonas,
-            status: 'waitForGuide',
+            status: 'Guía pendiente',
         };
         
         for (const dato in updatedState) {
