@@ -5,6 +5,7 @@ import './RutaListMap.css';
 import MapMarker from '../../assets/icons/location-pin.png';
 import { Polyline } from '@react-google-maps/api';
 import OfertaLugarCardContainer from '../OfertaLugarCardContainer/OfertaLugarCardContainer';
+import PlaceLugarCardContainer from '../PlaceLugarCardContainer/PlaceLugarCardContainer';
 
 const config = require('../../config');
 const GOOGLE_MAPS_API_KEY = config.googleMapsKey;
@@ -90,10 +91,11 @@ function RutaListMap({ coords = [] }) { //se ingresa las coordenadas de los luga
                 </GoogleMap>
             </LoadScript>
 
-            <OfertaLugarCardContainer
-            isVisible={true}
-            
-            />
+            {false &&
+                <OfertaLugarCardContainer isVisible={true}  />
+            }: {
+                <PlaceLugarCardContainer isVisible={true}  />
+            }
         </div>
     );
 }

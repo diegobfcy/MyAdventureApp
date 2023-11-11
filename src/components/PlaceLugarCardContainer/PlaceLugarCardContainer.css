@@ -1,0 +1,92 @@
+.OfertaLugarCardContainer-card-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: calc(100vh - 80px);
+    width: 50%;
+    overflow-y: auto;
+    background-color: white;
+    transform: translateX(-100%);
+    z-index: 2;
+    padding: 0 30px 20px 30px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.OfertaLugarCardContainer-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px; 
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #792A49;  
+}
+
+.OfertaLugarCardContainer-card-container.slideIn {
+    animation: slideInAnimation 0.5s forwards;
+}
+
+.OfertaLugarCardContainer-card-container.slideOut {
+    animation: slideOutAnimation 0.5s forwards;
+}
+
+@keyframes slideInAnimation {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutAnimation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.OfertaLugarCardContainer-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #792A49;
+}
+
+.OfertaLugarCardContainer-divider {
+    border: 0;
+    height: 1px;
+    background: #792A49;  
+    margin-bottom: 30px;
+}
+.OfertasLugarCardContainer-OfertaBtn {
+    background-color: #792A49;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px 10px 10px 0;
+}
+
+.OfertaLugarCardContainer-OfertaBtn:hover {
+    background-color: #5A1D3C; /* Un color más oscuro como ejemplo */
+}
+.OfertaLugarCardContainer-title input {
+    border: 1px solid #792A49;
+    border-radius: 5px;
+    padding: 5px; /* Esto es opcional pero le dará un poco de espacio alrededor del texto dentro del input */
+}

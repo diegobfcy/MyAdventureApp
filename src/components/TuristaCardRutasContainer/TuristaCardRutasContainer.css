@@ -36,6 +36,8 @@
 .TuristaCardRutasContainer-rightContainer {
     color: #792A49;
     width: 48%;
+    display: flex;
+    flex-direction: column;
     /* Aproximadamente la mitad del contenedor principal, con un pequeño espacio entre ellos */
 }
 
@@ -45,7 +47,8 @@
 }
 
 .TuristaCardRutasContainer-cardContainer {
-    /* Aquí puedes agregar estilos para el contenedor de las tarjetas si lo necesitas */
+   overflow-y: auto;
+    height: 100%;
 }
 
 .TuristaCardRutasContainer-closeButton {
