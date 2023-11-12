@@ -89,4 +89,5 @@
     border: 1px solid #792A49;
     border-radius: 5px;
     padding: 5px; /* Esto es opcional pero le dará un poco de espacio alrededor del texto dentro del input */
+    margin: 5px;
 }

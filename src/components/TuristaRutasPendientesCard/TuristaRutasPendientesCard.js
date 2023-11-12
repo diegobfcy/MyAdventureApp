@@ -18,6 +18,16 @@ const TuristaRutasPendientesCard = ({ data }) => {
     setIsOfert(true);
     navigate(`../${PrivateRoutes.OFERTROUTE}`);
   }
+
+  const handleOfertGuide = () =>{
+    setPlacesOfert({...data});
+    navigate(`../${PrivateRoutes.GUIDEOFFERTPAGE}`);
+  }
+
+  const handleOfertTransport = () =>{
+    setPlacesOfert({...data});
+    navigate(`../${PrivateRoutes.BOOKINGPAGE}`);
+  }
   
   return (
     <div className="TuristaRutasPendientesCard-card-container" >
@@ -36,19 +46,32 @@ const TuristaRutasPendientesCard = ({ data }) => {
       { data.guia && 
         <div className="TuristaRutasPendientesCard-card-row">
           <span>Guia:</span>
-          <span>{data.guia}</span>
+          <span>{data.guia['guideName']}</span>
         </div>
       }
-      { data.transporte && 
+      { data.transporte || data.status === "Por Confirmar" && 
         <div className="TuristaRutasPendientesCard-card-row">
           <span>Transporte:</span>
-          <span>{data.transporte}</span>
+          <span>{data.transporte ? data.transporte : data.guia['guideName']}</span>
+        </div>
+      }
+      { data.price && 
+        <div className="TuristaRutasPendientesCard-card-row">
+          <span>Precio:</span>
+          <span>S/. {data.price}</span>
         </div>
       }
       <div className="TuristaRutasPendientesCard-card-row">
         <button className="TuristaRutasPendientesCard-btn" onClick={handleMoreInfo}>Rutas</button>
-        <button className="TuristaRutasPendientesCard-btn">Oferta Guias</button>
-        <button className="TuristaRutasPendientesCard-btn">Oferta Transporte</button>
+        { !data.guia && 
+          <button className="TuristaRutasPendientesCard-btn" onClick={handleOfertGuide}>Oferta Guias</button>
+        }
+        { data.status !== "Por Confirmar" && 
+          <button className="TuristaRutasPendientesCard-btn" onClick={handleOfertTransport}>Oferta Transporte</button>
+        }
+        { data.status === "Por Confirmar" && 
+          <button className="TuristaRutasPendientesCard-btn">Confirmar</button>
+        }
       </div>
 
     </div>

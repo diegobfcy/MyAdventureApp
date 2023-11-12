@@ -1,7 +1,11 @@
 import React from 'react';
 import './GuideRutasPendientesCard.css';
 
-const GuideRutasPendientesCard = ({nombre, fecha, estado, cantidad, precio}) => {
+const GuideRutasPendientesCard = ({data}) => {
+  const fecha = `${data.day}-${data.month}-2023`;
+  const cantidad = data.persons;
+  const nombre = data.username;
+
   return (
     <div className="GuideRutasPendientesCard-guide-card-container">
       <div className="GuideRutasPendientesCard-guide-card-row">
@@ -14,7 +18,7 @@ const GuideRutasPendientesCard = ({nombre, fecha, estado, cantidad, precio}) => 
       </div>
       <div className="GuideRutasPendientesCard-guide-card-row">
         <span>Estado:</span>
-        <span>{estado}</span>
+        <span>{data.status}</span>
       </div>
       <div className="GuideRutasPendientesCard-guide-card-row">
         <span>Cantidad de personas:</span>
@@ -22,7 +26,7 @@ const GuideRutasPendientesCard = ({nombre, fecha, estado, cantidad, precio}) => 
       </div>
       <div className="GuideRutasPendientesCard-guide-card-row">
         <span>Precio:</span>
-        <span>{precio}</span>
+        <span>{data.price}</span>
       </div>
       <div className="GuideRutasPendientesCard-guide-card-row">
             <button className="GuideRutasPendientesCard-btn">Sobre la Ruta</button>
