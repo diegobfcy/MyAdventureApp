@@ -3,7 +3,7 @@ import './BookingGuideCard.css';
 import { PlaceGuideContext } from '../../context/PlaceGuideContext';
 import starIcon from '../../assets/icons/starIcon.png'; // Ajusta la ruta si es necesario
 
-function BookingGuideCard({ data, transporte, precio }) {
+function BookingGuideCard({ data, transporte, precio, change }) {
     const { setGuideTourData } = useContext(PlaceGuideContext)
 
     const setGuide = () =>{
@@ -11,7 +11,7 @@ function BookingGuideCard({ data, transporte, precio }) {
     }
 
     return (
-        <div className="booking-guide-card" onClick={setGuide}>
+        <div className="booking-guide-card" onClick={change ? setGuide : null}>
             <div className="booking-guide-card-row">
                 <div className="booking-guide-card-middle">
                     <div className="booking-guide-card-middle-left">

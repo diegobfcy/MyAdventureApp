@@ -61,9 +61,9 @@ function GuideOverlay() {
     <div className="GuideMainComponent">
       <div className="GuideMainComponent-RutasPendientes">
         <div>
-          <GuideRutasPendientesCard 
-            data ={dataPend.length == 0 ? []: dataPend[0]} 
-          />
+          {dataPend.map((item, key) => (
+            <GuideRutasPendientesCard key={key} data={item}/>
+          ))}
         </div>
       </div>
       <div className="GuideMainComponent-RutasDisponibles">

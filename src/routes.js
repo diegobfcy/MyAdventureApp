@@ -8,4 +8,5 @@ export const PrivateRoutes = {
     BOOKINGPAGE: 'bookingPage',
     OFERTROUTE: 'ofertaRuta',
     GUIDEOFFERTPAGE: 'ofertasGuia',
+    TRANSPORTOFFERTPAGE: 'ofertasTransporte',
 }

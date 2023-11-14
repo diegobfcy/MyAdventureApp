@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import Toolbar from '../../components/Toolbar/Toolbar';
 import { useLocation } from 'react-router-dom';
 import GuideCard from '../../components/GuideCard/GuideCard';
@@ -15,7 +15,6 @@ import TransportCard from '../../components/TransportCard/TransportCard';
 import arrowIcon from '../../assets/icons/arrowIcon.png'
 import PopupComponent from '../../components/ConfirmationPopUp/ConfirmationPopUp'
 import { CSSTransition } from 'react-transition-group';
-import { PlaceOfertContext } from '../../context/PlaceOfertContext';
 
 const fetchTransportsFromFirebase = async () => {
     const q = collection(db, 'Transportes');
@@ -32,10 +31,6 @@ function BookingPage() {
     const [selectedTransport, setSelectedTransport] = useState(null);
     const [popupVisible, setPopupVisible] = useState(false); // Estado para controlar la visibilidad del pop-up
     const [inProp, setInProp] = useState(false);
-    
-    const { placesOfert } = useContext(PlaceOfertContext)
-
-    console.log(placesOfert)
 
     useEffect(() => {
       setInProp(true);
@@ -76,6 +71,7 @@ function BookingPage() {
 
                     {/* Contenedor de GuideCard */}
                     <div className="sub-container">
+                        <BookingGuideCard data={guideData}/>
                         
                     </div>
 
@@ -118,8 +114,8 @@ function BookingPage() {
                         <div className="guide-line-summary"></div>
                         <div className="guide-summary">
                             
-                            <span>Fernando</span>
-                            <span>S/. 500</span>
+                            <span>{guideData.nombre}</span>
+                            <span>S/. {guideData.precio}</span>
                         </div>
                         <div className="transport-title-summary">Transporte</div>
                         <div className="transport-line-summary"></div>

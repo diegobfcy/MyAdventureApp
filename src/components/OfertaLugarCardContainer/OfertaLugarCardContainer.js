@@ -11,7 +11,7 @@ import { PrivateRoutes } from '../../routes';
 
 function OfertaLugarCardContainer({ isVisible, onClose }) {
     const { placesOfert, setPlacesOfert } = useContext( PlaceOfertContext);
-    const { setIsOfert } = useContext(RoutesFlagsContext)
+    const { setIsOfert, setJustView } = useContext(RoutesFlagsContext)
     const { userLogedDataCollection } = useContext(UserLogedContext)
     const UserEmail = userLogedDataCollection.email;
     const rol = userLogedDataCollection.rol
@@ -81,11 +81,12 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
     }
 
     const resetOFert = () => {
-        navigate(`../${PrivateRoutes.USERPAGE}`);
+        navigate(`../${PrivateRoutes.USERPAGE}`, { replace: true });
             setPlacesOfert({
                 places: [],
             });
         setIsOfert(false);
+        setJustView(false);
     }
 
     return (

@@ -5,6 +5,7 @@ import MainUserPage from './views/MainUserPage/MainUserPage';
 import MapPage from './views/MapPage/MapPage';
 import BookingPage from './views/BookingPage/BookingPage';
 import GuideOfertPage from './views/GuideOfertPage/GuideOfertPage';
+import TransportOfertPage from './views/TransportOfertPage/TransportOfertPage';
 import AuthContainer from './components/AuthContainer/AuthContainer';
 import {AuthUserRoutes, AuthOfertRoute} from './components/AuthUserRoutes/AuthUserRoutes';
 import { UserLogedContext } from './context/UserLogedContext';
@@ -29,9 +30,11 @@ function App() {
               <Route path={PrivateRoutes.USERPAGE} element={userLogedData ? <MainUserPage /> : <Navigate replace to={PublicRoutes.MAINPAGE}/>}/>
               <Route path={PrivateRoutes.MAPPAGE} element={userLogedData ? <MapPage /> : <Navigate replace to={PublicRoutes.MAINPAGE}/>} />
               <Route path={PrivateRoutes.BOOKINGPAGE} element={userLogedData ? <BookingPage /> : <Navigate replace to={PublicRoutes.MAINPAGE}/>} />
-                  <Route path={PrivateRoutes.GUIDEOFFERTPAGE} element={userLogedData ? <GuideOfertPage/> : <Navigate replace to={PublicRoutes.MAINPAGE}/>} />
               <Route element={<AuthOfertRoute/>}>
+                <Route path={PrivateRoutes.GUIDEOFFERTPAGE} element={<GuideOfertPage/>}/>
                 <Route path={PrivateRoutes.OFERTROUTE} element={<OfertaRutaPage/>} />
+                              <Route path={PrivateRoutes.TRANSPORTOFFERTPAGE} element={<TransportOfertPage/>}/>
+
               </Route>
             </Route>
           </Routes>

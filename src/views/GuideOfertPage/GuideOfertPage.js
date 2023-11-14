@@ -10,6 +10,7 @@ import { PlaceGuideContext } from '../../context/PlaceGuideContext';
 import { PlaceOfertContext } from '../../context/PlaceOfertContext';
 import { PrivateRoutes } from '../../routes';
 import './GuideOfertPage.css';
+import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
 const fetchGuidesFromFirebase = async () => {
   const q = collection(db, 'Guide');
@@ -23,6 +24,7 @@ function GuideOfertPage() {
   const { guideTourData } = useContext(PlaceGuideContext);
   const [guides, setGuides] = useState([]);
   const { placesOfert, setPlacesOfert } = useContext(PlaceOfertContext);
+  const { setIsOfert } = useContext(RoutesFlagsContext)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +49,7 @@ function GuideOfertPage() {
         guia: guideTourData,
         oferts: deleteField(),
         price: placesOfert.oferts[guideTourData.email].price,
+        transport: placesOfert.oferts[guideTourData.email].transport,
       };
 
       await updateDoc(requestRef, queryUpdate);
@@ -71,6 +74,7 @@ function GuideOfertPage() {
     setPlacesOfert({
       places: [],
     });
+    setIsOfert(false);
   };
 
   return (
@@ -89,8 +93,9 @@ function GuideOfertPage() {
                 <BookingGuideCard
                   key={idx}
                   data={guide}
-                  transporte={placesOfert.oferts ? placesOfert.oferts[guide.email].transport : ''}
-                  precio={placesOfert.oferts ? placesOfert.oferts[guide.email].price : ''}
+                  change={true}
+                  transporte={placesOfert.oferts && placesOfert.oferts[guide.email] ? placesOfert.oferts[guide.email].transport : ''}
+                  precio={placesOfert.oferts && placesOfert.oferts[guide.email] ? placesOfert.oferts[guide.email].price : ''}
                 />
               ))}
             </div>
