@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { collection, getDocs, query, limit } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import GuideRutasPendientesCard from "../GuideRutasPendientesCard/GuideRutasPendientesCard";
 import GuideRutasDisponiblesCard from "../GuideRutasDisponiblesCard/GuideRutasDisponiblesCard";
@@ -9,7 +9,15 @@ import { UserLogedContext } from "../../context/UserLogedContext";
 function GuideOverlay() {
   const [dataDisponible, setDataDisponible] = useState([]);
   const [dataOffered, setDataOffered] = useState([]);
-  const { userLogedData } = useContext(UserLogedContext)
+  const [dataPend, setDataPend] = useState([]);
+
+
+  const { userLogedData, userLogedDataCollection } = useContext(UserLogedContext)
+  const rol = userLogedDataCollection.rol;
+
+  const statusAvaible = rol === "Guia" ? "Guía pendiente" : "Transporte Pendiente"
+  const docElement = rol === "Guia" ? "oferts" : "ofertsTransport";
+
 
   useEffect(() => {
     const fetchDataRutasDisponibles = async () => {
@@ -19,10 +27,16 @@ function GuideOverlay() {
         ...request.data(),
         id: request.id,
       }));
+      const dataPending = data.filter((dataItem) => {
+        return dataItem.hasOwnProperty(rol.toLowerCase()) && 
+        dataItem[rol.toLowerCase()].email === userLogedData.email}
+      );
 
-      const dataAvaible = filterData(data);
-      setDataDisponible(dataAvaible.notOffered);
-      setDataOffered(dataAvaible.offered);
+      const dataAvaible = data.filter((data) => data.status === "A espera de Ofertas" || data.status === statusAvaible)
+      const request = filterData(dataAvaible);
+      setDataDisponible(request.notOffered);
+      setDataOffered(request.offered);
+      setDataPend(dataPending)
     }
     fetchDataRutasDisponibles();
   }, []);
@@ -30,7 +44,7 @@ function GuideOverlay() {
   const filterData = (data)=>{
     const result = data.reduce(
       (accumulator, objeto) => {
-        if (objeto.hasOwnProperty("oferts") && objeto.oferts.hasOwnProperty(userLogedData.email)) {
+        if (objeto.hasOwnProperty(docElement) && objeto[docElement].hasOwnProperty(userLogedData.email)) {
           accumulator.offered.push(objeto) 
         } else { 
           accumulator.notOffered.push(objeto);
@@ -47,13 +61,9 @@ function GuideOverlay() {
     <div className="GuideMainComponent">
       <div className="GuideMainComponent-RutasPendientes">
         <div>
-          <GuideRutasPendientesCard 
-            nombre="Juan Pérez" 
-            fecha="20-10-2023" 
-            estado="Pendiente" 
-            cantidad="3" 
-            precio="$100" 
-          />
+          {dataPend.map((item, key) => (
+            <GuideRutasPendientesCard key={key} data={item}/>
+          ))}
         </div>
       </div>
       <div className="GuideMainComponent-RutasDisponibles">

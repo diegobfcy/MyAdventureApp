@@ -1,0 +1,160 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.half-screen-left {
+    width: 50%; 
+    box-sizing: border-box;
+}
+.half-screen-right{
+    width: 40%; 
+    box-sizing: border-box;
+
+}
+
+.sub-container {
+    margin-bottom: 20px;
+}
+
+.text-line-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.text-line-container .transport-ofert-text {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #792A49;
+    margin-top: 15px;
+}
+.sub-container-transportes-container {
+    overflow-y: scroll;
+    max-height: 375px;
+}
+
+.text-line-container .line {
+    width: 100%;
+    height: 2px;
+    background-color: #792A49; 
+}
+.summary-container {
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 70%;
+    margin-top: 10%;
+    margin-left: auto;
+
+
+}
+.half-screen{
+    align-items: center;
+}
+
+.duration-text {
+    font-weight: bold;
+}
+
+.date-and-people-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.date-container, .people-container {
+    display: flex;
+    align-items: center;
+}
+
+.date-container img, .people-container img {
+    margin-left: 10px;
+}
+
+.guide-summary, .transport-summary, .total-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reservation-btn {
+    background-color: #792A49;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.reservation-btn:hover {
+    background-color: #5a1e32;
+}
+
+.total-title-summary {
+    font-weight: bold;
+    color: #792A49; 
+    margin-bottom: 5px;
+}
+
+.total-line-summary{
+    width: 100%; 
+    height: 2px;
+    background-color: #792A49; 
+    margin-bottom: 10px;
+}
+.guide-title-summary {
+    font-weight: bold;
+    color: #792A49; 
+    margin-bottom: 5px; 
+}
+
+.guide-line-summary {
+    width: 100%; 
+    height: 2px;
+    background-color: #792A49; 
+    margin-bottom: 10px;
+}
+.transport-title-summary {
+    font-weight: bold;
+    color: #792A49; 
+    margin-bottom: 5px; 
+}
+
+.transport-line-summary {
+    width: 100%; 
+    height: 2px;
+    background-color: #792A49; 
+    margin-bottom: 10px;
+}
+.slide-enter {
+    transform: translateX(100%);
+  }
+  
+  .slide-enter-active {
+    transform: translateX(0);
+    transition: transform 1000ms ease-in-out;
+  }
+  
+  .slide-exit {
+    transform: translateX(0);
+  }
+  
+  .slide-exit-active {
+    transform: translateX(-100%);
+    transition: transform 1000ms ease-in-out;
+  }
+  
+  div.slide-enter-active,
+  div.slide-exit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }

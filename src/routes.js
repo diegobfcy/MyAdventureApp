@@ -7,4 +7,6 @@ export const PrivateRoutes = {
     MAPPAGE: 'mapPage',
     BOOKINGPAGE: 'bookingPage',
     OFERTROUTE: 'ofertaRuta',
+    GUIDEOFFERTPAGE: 'ofertasGuia',
+    TRANSPORTOFFERTPAGE: 'ofertasTransporte',
 }

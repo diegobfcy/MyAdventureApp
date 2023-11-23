@@ -7,7 +7,7 @@ import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
 
 const GuideRutasDisponiblesCard = ({ data, offered }) => {
   const { setPlacesOfert } = useContext(PlaceOfertContext)
-  const { setIsOfert } = useContext(RoutesFlagsContext)
+  const { setIsOfert, setJustView } = useContext(RoutesFlagsContext)
   const fecha = `${data.day}-${data.month}-2023`;
   const cantidad = data.persons;
   const nombre = data.username;
@@ -17,6 +17,7 @@ const GuideRutasDisponiblesCard = ({ data, offered }) => {
     setPlacesOfert({...data, offered: offered});
     setIsOfert(true);
     navigate(`../${PrivateRoutes.OFERTROUTE}`);
+    setJustView(true)
   }
 
   return (

@@ -11,12 +11,14 @@ import { PrivateRoutes } from '../../routes';
 
 function OfertaLugarCardContainer({ isVisible, onClose }) {
     const { placesOfert, setPlacesOfert } = useContext( PlaceOfertContext);
-    const { setIsOfert } = useContext(RoutesFlagsContext)
+    const { setIsOfert, setJustView } = useContext(RoutesFlagsContext)
     const { userLogedDataCollection } = useContext(UserLogedContext)
     const UserEmail = userLogedDataCollection.email;
+    const rol = userLogedDataCollection.rol
+    const docElement = userLogedDataCollection.rol === "Guia" ? "oferts" : "ofertsTransport";
 
-    const [ofertaValue, setOfertaValue] = useState(placesOfert.offered ? placesOfert.oferts[UserEmail].price : '');
-    const [transporte, setTransporte] = useState(placesOfert.offered ? placesOfert.oferts[UserEmail].transport : 'sin transporte');
+    const [ofertaValue, setOfertaValue] = useState(placesOfert.offered ? placesOfert[docElement][UserEmail].price : '');
+    const [transporte, setTransporte] = useState(placesOfert.offered ? 'con transporte' : 'sin transporte');
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
@@ -27,48 +29,51 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
         onClose();
     };
 
-    const handleSendOfert = () =>{
-        if(ofertaValue <= 0){
-            setErrorMessage('El número de personas tiene que ser mayor a 0');
-        }else{
-            setErrorMessage('');
+    const handleSendOfert = () => {
+        let errorMessage = '';
+        if (ofertaValue <= 0) {
+            errorMessage = 'El precio tiene que ser mayor a 0';
+        } else {
             const ofert = {
-                price: ofertaValue,
-                transport: transporte,
-                username: `${userLogedDataCollection.name} ${userLogedDataCollection.surname}`, 
-                email: userLogedDataCollection.email,
+            price: ofertaValue,
+            username: `${userLogedDataCollection.name} ${userLogedDataCollection.surname}`,
+            email: userLogedDataCollection.email,
             };
-            placesOfert.offered ? updateRequestOfert(ofert) : updateOfert(ofert);
+
+            if (rol === "Guia") {
+            ofert.transport = transporte === "con transporte";
+            updateRequestOfert(ofert);
+            } else {
+            updateRequestTransport(ofert);
+            }
             resetOFert();
         }
+        setErrorMessage(errorMessage);
     };
 
 
     const updateRequestOfert = async (updatedState) => {
         try {
             const requestRef = doc(db, 'RequestPlaces', placesOfert.id);
-            const updatedData = {
-                oferts: {
-                    ...placesOfert.ofert,
-                    [updatedState.email]: updatedState
-                } 
-            };
-            await updateDoc(requestRef, updatedData);
+            const existingOferts = placesOfert.oferts || {};
+            
+            existingOferts[updatedState.email] = updatedState;
+            await updateDoc(requestRef, { oferts: existingOferts });
+
             setOfertaValue('');
         } catch (error) {
             console.log(error);
         }
     }
 
-    const updateOfert = async (updatedState) => {
+    const updateRequestTransport = async (updatedState) => {
         try {
             const requestRef = doc(db, 'RequestPlaces', placesOfert.id);
-            const updatedData = {
-                oferts: {
-                    [updatedState.email]: updatedState
-                } 
-            };
-            await updateDoc(requestRef, updatedData);
+            const existingOfertsTransport = placesOfert.ofertsTransport || {};
+            
+            existingOfertsTransport[updatedState.email] = updatedState;
+            await updateDoc(requestRef, { ofertsTransport: existingOfertsTransport });
+
             setOfertaValue('');
         } catch (error) {
             console.log(error);
@@ -76,11 +81,12 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
     }
 
     const resetOFert = () => {
-        navigate(`../${PrivateRoutes.USERPAGE}`);
+        navigate(`../${PrivateRoutes.USERPAGE}`, { replace: true });
             setPlacesOfert({
                 places: [],
             });
         setIsOfert(false);
+        setJustView(false);
     }
 
     return (
@@ -95,6 +101,7 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
                     min="1"
                 />
             </div>
+            {rol === "Guia" &&
             <div className="OfertaLugarCardContainer-transporteOptions">
                 <label>
                     <input
@@ -116,6 +123,7 @@ function OfertaLugarCardContainer({ isVisible, onClose }) {
                 </label>
 
             </div>
+            } 
             {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className='OfertaLugarCardContainer-enviarOfertaBtn'>
                 <button className="OfertaLugarCardContainer-OfertaBtn" onClick={handleSendOfert}>

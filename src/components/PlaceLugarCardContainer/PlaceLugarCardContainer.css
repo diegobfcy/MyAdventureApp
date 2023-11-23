@@ -71,15 +71,15 @@
     background: #792A49;  
     margin-bottom: 30px;
 }
-.OfertaLugarCardContainer-OfertaBtn {
+.OfertasLugarCardContainer-OfertaBtn {
     background-color: #792A49;
     border-radius: 5px;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin: 10px;
     transition: 0.3s;
+    margin: 10px 10px 10px 0;
 }
 
 .OfertaLugarCardContainer-OfertaBtn:hover {
@@ -89,5 +89,4 @@
     border: 1px solid #792A49;
     border-radius: 5px;
     padding: 5px; /* Esto es opcional pero le dará un poco de espacio alrededor del texto dentro del input */
-    margin: 5px;
 }

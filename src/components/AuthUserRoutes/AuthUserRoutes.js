@@ -11,7 +11,5 @@ export const AuthUserRoutes = () => {
 
 export const AuthOfertRoute = () =>{
   const { isOfert } = useContext(RoutesFlagsContext);
-  console.log(isOfert)
-
   return isOfert ? <Outlet /> : <Navigate replace to={PrivateRoutes.USERPAGE} />;
 }

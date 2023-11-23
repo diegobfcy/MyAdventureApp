@@ -2,12 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import TuristaRutasPendientesCard from "../TuristaRutasPendientesCard/TuristaRutasPendientesCard";
+import TuristaRutasConfirmadasCard from "../TuristaRutasConfirmadas/TuristaRutasConfirmadasCard";
 import './TuristaCardRutasContainer.css';
 import { UserLogedContext } from "../../context/UserLogedContext";
  
 
 function TuristaCardRutasContainer({ onClose }) {
     const [dataPendiente, setDataPendiente] = useState([]);
+    const [dataConfirmada, setDataConfirmadae] = useState([]);
     const { userLogedData } = useContext(UserLogedContext)
 
     useEffect(() => {
@@ -20,7 +22,11 @@ function TuristaCardRutasContainer({ onClose }) {
         }));
 
         const dataAvaible = data.filter( (place) => place.user === userLogedData.email);
-        setDataPendiente(dataAvaible)
+        const dataConfirm = dataAvaible.filter( (place) => place.status === "Confirmado");
+        const dataPend = dataAvaible.filter( (place) => place.status !== "Confirmado");
+
+        setDataPendiente(dataPend)
+        setDataConfirmadae(dataConfirm)
 
         }
         fetchDataRutasDisponibles();
@@ -33,7 +39,12 @@ function TuristaCardRutasContainer({ onClose }) {
                 <div className="TuristaCardRutasContainer-leftContainer">
                     <h2 className="TuristaCardRutasContainer-title">Rutas Confirmadas</h2>
                     <div className="TuristaCardRutasContainer-cardContainer">
-                        
+                    {dataConfirmada.map((item, key) => (
+                        <TuristaRutasConfirmadasCard key={key} data={item}/>
+                    ))}
+                    {dataConfirmada.length === 0 && (
+                         <p style={{ height: '800px' }}>No hay peticiones confirmadas</p>
+                    )}  
                     </div>
                 </div>
 

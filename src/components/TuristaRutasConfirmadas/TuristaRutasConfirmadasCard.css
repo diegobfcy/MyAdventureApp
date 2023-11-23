@@ -1,0 +1,35 @@
+.TuristaRutasConfirmadasCard-card-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-shadow: 0px 0px 5px #aaa;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.TuristaRutasConfirmadasCard-card-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.TuristaRutasConfirmadasCard-btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  row-gap: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #792A49;
+  color: white;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.TuristaRutasConfirmadasCard-btn:hover {
+  background-color: #792A49;
+}
+
+.TuristaRutasConfirmadasCard-card-row:has(.TuristaRutasConfirmadasCard-btn) {
+  justify-content: flex-start; 
+  margin-right: 5px; 
+
+}

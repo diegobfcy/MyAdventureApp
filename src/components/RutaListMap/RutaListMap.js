@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import MapCard from '../MapCard/MapCard';
 import './RutaListMap.css';
 import MapMarker from '../../assets/icons/location-pin.png';
 import { Polyline } from '@react-google-maps/api';
 import OfertaLugarCardContainer from '../OfertaLugarCardContainer/OfertaLugarCardContainer';
+import PlaceLugarCardContainer from '../PlaceLugarCardContainer/PlaceLugarCardContainer';
+import { UserLogedContext } from '../../context/UserLogedContext';
+import { RoutesFlagsContext } from '../../context/RoutesFlagsContext';
+
 
 const config = require('../../config');
 const GOOGLE_MAPS_API_KEY = config.googleMapsKey;
@@ -32,6 +36,9 @@ const mapOptions = {
 
 function RutaListMap({ coords = [] }) { //se ingresa las coordenadas de los lugares que se van a visitar
     const googleMapsRef = useRef(null);
+    const { userLogedDataCollection } = useContext(UserLogedContext)
+    const { justView } = useContext(RoutesFlagsContext)
+    const rol = userLogedDataCollection.rol
 
     const handleGoogleMapsLoad = () => {
         googleMapsRef.current = window.google;
@@ -90,10 +97,12 @@ function RutaListMap({ coords = [] }) { //se ingresa las coordenadas de los luga
                 </GoogleMap>
             </LoadScript>
 
-            <OfertaLugarCardContainer
-            isVisible={true}
-            
-            />
+            {(rol === "Guia" || rol === "Transporte") && justView ? (
+                <OfertaLugarCardContainer isVisible={true} />
+            ) : (
+                <PlaceLugarCardContainer isVisible={true} />
+            )}
+
         </div>
     );
 }
